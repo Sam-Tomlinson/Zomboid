@@ -1,0 +1,7 @@
+%Zomboid: Escape from Columbus 
+clc
+clear
+zomboid = simpleGameEngine('retro_pack.png',16,16,5, [255,255,255]);
+drawScene(zomboid,);
+
+

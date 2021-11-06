@@ -1,14 +1,10 @@
 %Zomboid: Escape from Columbus 
-alive = true;
-time = 0;
-while alive && time <= 500
-	fprintf('Its been two weeks since the zombie apocolypose started.')
-    fprintf('I have been listening to the radio all day.')
-    fprintf('My name is daniel and I am very attractive')
-<<<<<<< Updated upstream
-for i = (1:5)
-    i == dick
-end
-=======
-end
->>>>>>> Stashed changes
+clc
+clear
+zomboid = simpleGameEngine('retro_pack.png',16,16,5);
+drawScene(zomboid,[[529   530  327 530   531];[561     1  1   1   563];...
+    [561     1  26   1   563];[561     1  1   1   563];...
+    [593   594  594 594   595]]);
+
+
+
