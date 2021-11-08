@@ -1,8 +1,0 @@
-function [layer1,layer2] = unLayer(saveFile, numOfRows);
-    
-    fullLevel = load(saveFile);
-    fulldim = size(fullLevel)
-    for i = 1:dim(2)
-       layer1(i,:) = fullLevel(i,:);
-       layer2(i,:) = fullLevel(i+5,:);
-    end
