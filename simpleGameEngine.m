@@ -229,7 +229,7 @@ classdef simpleGameEngine < handle
             
             % Get the user mouse input
             [X,Y,button] = ginput(1);
-            
+               
             % Convert this into the tile row/column
             row = ceil(Y/obj.sprite_height/obj.zoom);
             col = ceil(X/obj.sprite_width/obj.zoom);
@@ -245,7 +245,7 @@ classdef simpleGameEngine < handle
             if row < 1
                 row = 1;
             elseif row > max_row
-                row = max_row;
+                row = max_row;            
             end
             if col < 1
                 col = 1;
