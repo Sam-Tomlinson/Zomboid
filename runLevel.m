@@ -1,5 +1,5 @@
-function [layer1,layer2] = unLayer(saveFile)
-    
+function runLevel(gameObject, saveFile)
+
     fullLevel = load(saveFile);
     fullDim = size(fullLevel);
     numOfRows = fullDim(1) ./ 2;
@@ -7,3 +7,7 @@ function [layer1,layer2] = unLayer(saveFile)
        layer1(i,:) = fullLevel(i,:);
        layer2(i,:) = fullLevel(i+numOfRows,:);
     end
+    
+    drawScene(gameObject,layer1,layer2)
+end
+
