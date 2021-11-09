@@ -1,0 +1,30 @@
+%Zomboid: Escape from Columbus 
+clc; clear; close all;
+zomboid = simpleGameEngine('retro_pack.png',16,16,5);
+clock = simpleGameEngine('retro_pack.png',16,16,5)
+stage = 1;
+timeleft = 300
+while stage ~= 0
+    switch stage
+        case 0
+        case 1
+            
+        case 2
+            runLevel(zomboid,'Bunker.txt');
+            tstart = tic;
+            cprintf('*Text','A little over three days agop the apocolypse began.  I was just sitting in my house when I suddenly heard strange moaning noises outside')
+            cprintf('*text','I immediately dashed to my window and saw there were ZOMBIES everywhere.  I went to my pantry and grabbed all the food that I could and went')
+            cprintf('*text','straight to the cellar.  I also managed to snag my radio on the way there and have been listening to it ever since.')
+            cprintf('err','In wake of the tragedy that has been occuring, the military will be bombing the epicenter of the zombie outbreak, Columbus Ohio, in approxamently 5 hours')
+            cprintf
+            timePassed = toc(tstart);
+            timeleft = gameClock(timeLeft,timePassed,clock)
+    end
+end
+tstart = tic;
+pause(2)
+tend = toc(tstart)
+
+
+
+
