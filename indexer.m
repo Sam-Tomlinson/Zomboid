@@ -7,5 +7,5 @@ function oneNumIndex = indexer(arrayDim, rowVal, columnVal, gameEngine);
     if nargin == 4
         oneNumIndex = (rowVal-1)*arrayDim(1) + columnVal;
     else
-        oneNumIndex = (columnVal-1)*arrayDim(2) + rowVal; 
+        oneNumIndex = (columnVal-1)*arrayDim(1) + rowVal; 
 end
