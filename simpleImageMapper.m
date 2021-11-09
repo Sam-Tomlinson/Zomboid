@@ -13,7 +13,7 @@ oneNumIndex = 2;
 k=1;
 while k <= 31
     [row,collumn] = getMouseInput(everything);
-    oneNumIndex = (row-1)*32 + collumn; 
+    oneNumIndex = (row-1)*32 + collumn 
     board(34,k) = oneNumIndex;
     board(34,k+1) = 724; 
     drawScene(everything,board);
