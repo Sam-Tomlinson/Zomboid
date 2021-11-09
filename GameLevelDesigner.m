@@ -13,9 +13,21 @@ end
 
 %Find out what size game level is wanted and create ones vector of that
 %size
-dim = input('Insert the dimensions your level as a vector:  ');
-yourLevel1 = ones(dim(1),dim(2));
-yourLevel2 = ones(dim(1),dim(2));
+new = input('Do you want to make a new level? [y]');
+if isempty(new)
+    dim = input('Insert the dimensions your level as a vector:  ');
+    yourLevel1 = ones(dim(1),dim(2));
+    yourLevel2 = ones(dim(1),dim(2));
+else
+    saveFile = input('Type what saveFile you would like to load: ')
+    fullLevel = load(saveFile);
+    fullDim = size(fullLevel);
+    numOfRows = fullDim(1) ./ 2;
+    for i = 1:numOfRows
+       yourLevel1(i,:) = fullLevel(i,:);
+       yourLevel2(i,:) = fullLevel(i+numOfRows,:);
+    end
+end
 
 myPixel = 1;
 run = true;
