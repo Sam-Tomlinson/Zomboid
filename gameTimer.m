@@ -12,7 +12,7 @@ function time = gameTimer(startTime,timePassed,gameObject)
     
     % calculates time passed and converts it into a string of
     % minutes.seconds form
-    time = startTime-timePassed; % also time remaining in seconds
+    time = startTime - timePassed; % also time remaining in seconds
     if time >= 60
         minutes = floor(time/60);
         seconds = mod(time,60);
@@ -51,6 +51,11 @@ function time = gameTimer(startTime,timePassed,gameObject)
             dispTimeIndex(end+1) = numberIndex(11);
             dispTimeIndex(end+1) = numberIndex(1);
             dispTimeIndex(end+1) = numberIndex(1);
+        end
+        
+    % if time is negative just display zero for time    
+        if time < 0
+            dispTimeIndex = [948 958 948 948];
         end
     
     % draws the scene titled 'Time Remaining'   

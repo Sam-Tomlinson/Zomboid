@@ -4,7 +4,7 @@ function time = gameTimer(startTime,timePassed,gameObject)
     % inputs starting time, time passed, both in seconds.
     % optional: simpleGameEngineObject
     % if the gameObject is inputted, the gameTimer will draw a scene
-    % creating a clock of the 
+    % creating a clock that displays the time remaining
     
     %loads variables
     numberStr = load('numberStr.txt');
@@ -51,6 +51,11 @@ function time = gameTimer(startTime,timePassed,gameObject)
             dispTimeIndex(end+1) = numberIndex(11);
             dispTimeIndex(end+1) = numberIndex(1);
             dispTimeIndex(end+1) = numberIndex(1);
+        end
+        
+    % if time is negative just display zero for time    
+        if time < 0
+            dispTimeIndex = [948 958 948 948];
         end
     
     % draws the scene titled 'Time Remaining'   
