@@ -12,14 +12,14 @@ for i = 1:32
 end
 
 %Find out what size game level is wanted and create ones vector of that
-%size
-new = input('Do you want to make a new level? [y]');
+%size.  Otherwise input a .txt save file to edit.
+new = input('Do you want to make a new level? [y]\n','s');
 if isempty(new)
     dim = input('Insert the dimensions your level as a vector:  ');
     yourLevel1 = ones(dim(1),dim(2));
     yourLevel2 = ones(dim(1),dim(2));
 else
-    saveFile = input('Type what saveFile you would like to load: ')
+    saveFile = input('Type what saveFile you would like to load: ','s')
     fullLevel = load(saveFile);
     fullDim = size(fullLevel);
     numOfRows = fullDim(1) ./ 2;
