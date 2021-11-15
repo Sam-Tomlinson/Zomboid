@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-11-15T06:20:15.060Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36" etag="Z4ADj84S9SInEbgnIMcU" version="15.7.3" type="github">
+<mxfile host="app.diagrams.net" modified="2021-11-15T06:21:56.278Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36" etag="9IDclntChmwL67xaR3kk" version="15.7.3" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="960" dy="1090" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2291" dy="1103" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -365,7 +365,13 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="MvipGWCdthpCxF3CYsWU-39" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="MvipGWCdthpCxF3CYsWU-6" target="MvipGWCdthpCxF3CYsWU-38">
-          <mxGeometry relative="1" as="geometry" />
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="160" y="880" />
+              <mxPoint x="160" y="1423" />
+              <mxPoint x="290" y="1423" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="MvipGWCdthpCxF3CYsWU-6" value="help dog with first aid" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="220" y="840" width="80" height="80" as="geometry" />
@@ -435,13 +441,13 @@
           <mxGeometry x="245" y="990" width="30" height="20" as="geometry" />
         </mxCell>
         <mxCell id="MvipGWCdthpCxF3CYsWU-31" value="Ending 3: Best Friends" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="354" y="1910" width="120" height="80" as="geometry" />
+          <mxGeometry x="400" y="1920" width="120" height="80" as="geometry" />
         </mxCell>
         <mxCell id="MvipGWCdthpCxF3CYsWU-33" value="no" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="255" y="940" width="30" height="20" as="geometry" />
         </mxCell>
         <mxCell id="MvipGWCdthpCxF3CYsWU-38" value="ending 4 mans best friend" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="100" y="860" width="80" height="50" as="geometry" />
+          <mxGeometry x="270" y="1920" width="110" height="75" as="geometry" />
         </mxCell>
         <mxCell id="MvipGWCdthpCxF3CYsWU-40" value="yes" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="190" y="860" width="30" height="20" as="geometry" />
