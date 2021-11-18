@@ -1,5 +1,4 @@
 % Zomboid escape from Columbus
-5
 % Start stuff
 clc; clear; close all;
 zomboid = simpleGameEngine('retro_pack.png',16,16,5);
@@ -27,6 +26,16 @@ triedDoor = false;
 companion2 = true;
 companionChoice = 'default';
 banditBlockade = 'default';
+banditSneak = 'default';
+dogSave = 'default';
+boatBranch = 'default';
+roughWater = 'default';
+brokenBoat = 'default';
+banditZombieFight = 'default';
+banditOffer = 'default';
+comunityChoice = 'default';
+communityZombieHoard = 'default';
+finalZombies = 'default';
 
 %Debug stuff
 runLevel(zomboid,'blankScreen.txt')
@@ -309,6 +318,9 @@ while stage ~= 0 && timeLeft > 0
         
         % if you had no weapon/machete: fight
         case 14
+            clc;
+            fprintf('You see a strange pannel')
+            stage = 17;
         
         % Choice how to deal with bandit blockade
         case 15
@@ -317,7 +329,7 @@ while stage ~= 0 && timeLeft > 0
             fprintf(' a.)   sneak past\n')
             fprintf(' b.)   fight\n\n')
             while isequal(banditBlockade,'default')
-               banditBlockade = getKeyboardInput(zomboid)
+               banditBlockade = getKeyboardInput(zomboid);
                if isequal(banditBlockade,'b') && companion1 == true
                    fprintf('You and your companion escape and live happily ever after')
                    win = 'Best Friends';
@@ -326,35 +338,225 @@ while stage ~= 0 && timeLeft > 0
                     fprintf('The bandits kill you')
                     stage = 0;
                elseif isequal(banditBlockade,'a')
+                   fprintf('you sneak around the bandits\n')
+                   stage = 16;
                end
             end
         
         % How do you want to sneak around the bandits?
         case 16
+            clc;
+            fprintf('How do you get around the bandits?\n\n')
+            fprintf(' a.)   Go into buildings\n')
+            fprintf(' b.)   Go into the sewers\n\n')
+            while isequal(banditSneak,'default')
+                banditSneak = getKeyboardInput(zomboid);
+                if isequal(banditSneak,'a')
+                    fprintf('There is a zombie in the building and you die\n')
+                    stage = 0;
+                elseif isequal(banditSneak,'b')
+                    fprintf('You enter the sewers')
+                    stage = 14;
+                else 
+                    banditSneak = 'default';
+                end
+            end
         
         % Do you save dog
         case 17
+            clc;
+            fprintf('The sewers are a confusing place, especially in a zombie apocolypse\n')
+            fprintf('Just as you are about to lose help you hear a dog.\n\n')
+            if haveFirstAidKit == true
+                fprintf(' a.)   Save dog\n')
+                fprintf(' b.)   Let dog die\n\n')
+                while isequal(dogSave,'default')
+                    dogSave = getKeyboardInput(zomboid);
+                    if isequal(dogSave,'a')
+                        fprintf('You save the dog with your first aid kit.  The dog leads you out of the sewers, you both escape\n')
+                        win = 'Mans best friend';
+                        stage = 0;
+                    elseif isequal(dogSave,'b')
+                        fprintf('You leave the dog where it is, not wanting unecessary burdens.  You don''t make it out in time\n')
+                        stage = 0;
+                    else
+                        dogSave = 'default';
+                    end
+                end
+            else
+                fprintf('You sit with the dog waiting for the end')
+                stage = 0;
+            end
         
-        % Which river branch do you choose to go down
+        % Which river branch do you choose to go down other branch may be
+        % fine eventually
         case 18
-        
+            clc
+            fprintf('There is a branch in the river, which branch will you take?\n\n')
+            fprintf(' a.)   Branch 1\n')
+            fprintf(' b.)   Branch 2\n\n')
+            while isequal(boatBranch,'default')
+                boatBranch = getKeyboardInput(zomboid);
+                if isequal(boatBranch,'a')
+                    fprintf('The branch has a waterfall?')
+                    stage = 0;
+                elseif isequal(boatBranch,'b')
+                    fprintf('You enter the second branch')
+                    stage = 19;
+                else
+                    boatBranch = 'default';
+                end
+            end
         % What do you do to survive rough waters
         case 19 
+            clc
+            fprintf('The water starts to roughen, what do you do?\n\n')
+            fprintf(' a.)   Swim for the shore\n')
+            fprintf(' b.)   Brace for impact\n\n')
+            while isequal(roughWater,'default')
+                roughWater = getKeyboardInput(zomboid);
+                if isequal(roughWater,'a')
+                    fprintf('The water is too rough and you die')
+                    stage = 0;
+                elseif isequal(roughWater,'b')
+                    fprintf('You survive the rough water')
+                    stage = 20;
+                else
+                    roughWater = 'default';
+                end
+            end
         
         % What do you do with the damaged raft
         case 20
+            clc;
+            fprintf('You boat is damaged and is slowly sinking.  What do you do?\n')
+            fprintf(' a.)   Use debri to paddle\n')
+            fprintf(' b.)   Call for help\n')
+            fprintf(' c.)   Swim to shore\n\n')
+            while isequal(brokenBoat,'default')
+                brokenBoat = getKeyboardInput(zomboid);
+                if isequal(brokenBoat,'a')
+                    fprintf('You don''t make it to shore in time and drown\n')
+                    stage = 0;                    
+                elseif isequal(brokenBoat,'b')
+                    fprintf('you call for help\n')
+                    weapon = 'none';
+                    stage = 21;                    
+                elseif isequal(brokenBoat,'c')
+                    fprintf('The water is less rough and you make it to shore\n')
+                    stage = 23;
+                else
+                    brokenBoat = 'default';
+                end
+            end
         
         % How do you fight the zombie
         case 21
+            clc;
+            fprintf('Bandits answer your call and decide to save you.\nThey do make you fight against a zombie though\n')
+            fprintf('How do you fight the zombie?\n')
+            fprintf(' a.)   Punch it\n')
+            fprintf(' b.)   Try and escape\n')
+            fprintf(' c.)   Grab a bandit and push them infront of the zombie\n\n')
+            while isequal(banditZombieFight,'default')
+                banditZombieFight = getKeyboardInput(zomboid);
+                if isequal(banditZombieFight,'a')
+                    fprintf('You punch the zombie, it bites your arm.\n')
+                    stage = 0;
+                elseif isequal(banditZombieFight,'b')
+                    fprintf('You try and escape but the bandits pin you down and let the zombie kill you.\n')
+                    stage = 0;
+                elseif isequal(banditZombieFight,'c')
+                    fprintf('You pull a bandit into the ring, and the zombie kills them\n')
+                    stage = 22;
+                else
+                    banditZombieFight = 'default';
+                end
+            end
         
         % Do you join the bandits
         case 22
+            clc;
+            fprintf('The bandits are so inpressed they offer you a spot in their gang\n\n')
+            fprintf(' a.)   Accept Bandits offer\n')
+            fprintf(' b.)   Decline Bandits offer\n\n')
+            while isequal(banditOffer,'default')
+                banditOffer = getKeyboardInput(zomboid);
+                if isequal(banditOffer,'a')
+                    fprintf('You join the bandits and terrorize the world for decades to come')
+                    win = 'Straight up g';
+                    stage = 0;
+                elseif isequal(banditOffer,'b')
+                    fprintf('The bandits are disapointed, but since they are impressed with your skill they let you go\n')
+                    stage = 23;
+                else
+                    banditOffer = 'default';
+                end
+            end
         
         % Do you help the community
         case 23
+            clc;
+            fprintf('You get to the shore and find a large group of people trying to escape.\n\n')
+            fprintf(' a.)   Help them\n')
+            fprintf(' b.)   Carry on your way\n\n')
+            while isequal(comunityChoice,'default')
+                comunityChoice = getKeyboardInput(zomboid);
+                if isequal(comunityChoice,'a')
+                    fprintf('You decide to help the people\n')
+                    stage = 24;
+                elseif isequal(comunityChoice,'b')
+                    fprintf('You leave without them\n')
+                    stage = 25;
+                else
+                    comunityChoice = 'default';
+                end
+            end
         
         % How do you deal with the zombie horde
         case 24
+            clc;
+            fprintf('You decide to help the community, escape the zombie horde.  How?\n\n')
+            fprintf(' a.)   Fight the zombies\n')
+            fprintf(' b.)   Distract the hoard\n\n')
+            while isequal(communityZombieHoard,'default')
+                communityZombieHoard = getKeyboardInput(zomboid);
+                if isequal(communityZombieHoard,'a')
+                    fprintf('You the people to charge the zombies.\n You all die\n')
+                    stage = 0;
+                elseif isequal(communityZombieHoard,'b')
+                    fprintf('You distract all of the zombie by making a loud noise.\n')
+                    fprintf('While you didn''t survive, you did save dozens of people.\n')
+                    win = 'Hero to the people';
+                    stage = 0;
+                else
+                    communityZombieHoard = 'default';
+                end
+            end
+            
+        % Last path   
+        case 25
+            clc;
+            fprintf('Ignored the peope in need and continued on your way\n')
+            fprintf('Right before you can leave columbus there is a group of zombies in the way\n\n')
+            fprintf(' a.)   Fight the zombies\n')
+            fprintf(' b.)   Find another way out\n\n')
+            while isequal(finalZombies,'default')
+                finalZombies = getKeyboardInput(zomboid);
+                if isequal(finalZombies,'a') && ~isequal(weapon,'none')
+                    fprintf('You kill the zombies and escape\n')
+                    win = 'Cold Blooded';
+                    stage = 0;
+                elseif isequal(finalZombies,'a')
+                    fprintf('You fail to kill the zombies\n')
+                    stage = 0;
+                elseif isequal(finalZombies,'b')
+                    fprintf('You don''t make it out in time\n')
+                    stage = 0;
+                else
+                    finalZombies = 'default';
+                end
+            end        
     end       
 end
 clc;
