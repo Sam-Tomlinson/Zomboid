@@ -1,5 +1,5 @@
 % Zomboid escape from Columbus
-
+5
 % Start stuff
 clc; clear; close all;
 zomboid = simpleGameEngine('retro_pack.png',16,16,5);
@@ -25,7 +25,7 @@ alleyStreet = 'default';
 alleyZombies = 'default';
 triedDoor = false;
 companion2 = true;
-companionChoice = 'default'
+companionChoice = 'default';
 
 %Debug stuff
 runLevel(zomboid,'blankScreen.txt')
