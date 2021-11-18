@@ -58,7 +58,7 @@ while stage ~= 0 && timeLeft > 0
                 elseif weapon == 'b'
                     weapon = 'Machete';
                 else 
-                    clear weapon
+                    weapon = 'default';
                 end
             end
             timePassed = floor(toc(tstart));
