@@ -1,4 +1,10 @@
 clc; clear; close all;
+
+parfor b = 1:100;
+     fprintf('%i\n',b)
+     pause(.01)
+end
+
 %Setup simpleGameEngine with retro pack:
 pixelBoard = simpleGameEngine('retro_pack.png',16,16,5);
 tileSelection = simpleGameEngine('retro_pack.png',16,16,5);
@@ -12,10 +18,22 @@ for i = 1:32
 end
 
 %Find out what size game level is wanted and create ones vector of that
-%size
-dim = input('Insert the dimensions your level as a vector:  ');
-yourLevel1 = ones(dim(1),dim(2));
-yourLevel2 = ones(dim(1),dim(2));
+%size.  Otherwise input a .txt save file to edit.
+new = input('Do you want to make a new level? [y]\n','s');
+if isempty(new)
+    dim = input('Insert the dimensions your level as a vector:  ');
+    yourLevel1 = ones(dim(1),dim(2));
+    yourLevel2 = ones(dim(1),dim(2));
+else
+    saveFile = input('Type what saveFile you would like to load: ','s')
+    fullLevel = load(saveFile);
+    fullDim = size(fullLevel);
+    numOfRows = fullDim(1) ./ 2;
+    for i = 1:numOfRows
+       yourLevel1(i,:) = fullLevel(i,:);
+       yourLevel2(i,:) = fullLevel(i+numOfRows,:);
+    end
+end
 
 myPixel = 1;
 run = true;
@@ -82,4 +100,3 @@ saveName = input('What do you want to call this level? ','s');
 saveName = append(saveName,'.txt');
 save(saveName,'yourLevel1','yourLevel2','-ASCII');
 fprintf('saved as %s \n',saveName);
-
