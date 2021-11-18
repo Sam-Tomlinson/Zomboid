@@ -26,6 +26,7 @@ alleyZombies = 'default';
 triedDoor = false;
 companion2 = true;
 companionChoice = 'default';
+banditBlockade = 'default';
 
 %Debug stuff
 runLevel(zomboid,'blankScreen.txt')
@@ -294,11 +295,11 @@ while stage ~= 0 && timeLeft > 0
                 end
             end
         
-        % Check if you have a gun: win 
+        % Fight with companion 1, if you win: win, if you lose: die 
         case 13
             doYouWinFight = randi(2);
             if doYouWinFight == 1
-                fprintf('You wond the fight and successfully escaped\n')
+                fprintf('You won the fight and successfully escaped\n')
                 win = 'Survival of the Fittest';
                 stage = 0;
             else 
@@ -311,6 +312,22 @@ while stage ~= 0 && timeLeft > 0
         
         % Choice how to deal with bandit blockade
         case 15
+            clc;
+            fprintf('You continue along the street.  Soon encounter a bandit blockade, what do you do?\n\n')
+            fprintf(' a.)   sneak past\n')
+            fprintf(' b.)   fight\n\n')
+            while isequal(banditBlockade,'default')
+               banditBlockade = getKeyboardInput(zomboid)
+               if isequal(banditBlockade,'b') && companion1 == true
+                   fprintf('You and your companion escape and live happily ever after')
+                   win = 'Best Friends';
+                   stage = 0;
+               elseif isequal(banditBlockade,'b')
+                    fprintf('The bandits kill you')
+                    stage = 0;
+               elseif isequal(banditBlockade,'a')
+               end
+            end
         
         % How do you want to sneak around the bandits?
         case 16
