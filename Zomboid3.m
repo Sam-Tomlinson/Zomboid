@@ -387,6 +387,7 @@ while stage ~= 0 && timeLeft > 0
                 fprintf('You sit with the dog waiting for the end')
                 stage = 0;
             end
+            pause(5)
         
         % Which river branch do you choose to go down other branch may be
         % fine eventually
