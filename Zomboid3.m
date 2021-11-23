@@ -1,15 +1,6 @@
-% Zomboid escape from the City
-
-% Check if player has played before
-if ~exist('playedBefore')
-    clear;
-    dlgtitle = 'Save File';
-    definput = '0000000';
-    saveFile = inputdlg('Input Your Save File');
-    
-    
+% Zomboid escape from Columbus
 % Start stuff
-clc; close all;
+clc; clear; close all;
 zomboid = simpleGameEngine('retro_pack.png',16,16,5);
 clock = simpleGameEngine('retro_pack.png',16,16,5);
 numberIndex = load('numberIndex.txt');
@@ -46,11 +37,6 @@ comunityChoice = 'default';
 communityZombieHoard = 'default';
 finalZombies = 'default';
 
-
-    
-end
-    
-
 %Debug stuff
 runLevel(zomboid,'blankScreen.txt')
 
@@ -62,8 +48,15 @@ while stage ~= 0 && timeLeft > 0
         
         % Intro Text
         case 1
-            fprintf('Intro Text\n')
+            cprintf('[109, 110, 103]','A little over a week ago, patient zero escaped a military laboratory unleashing the zombie virus into your city.\n')
+            cprintf('[109, 110, 103]','Since then, you have been hunkered down in your house waiting for the military to come to your salvation.\n')
+            cprintf('[109, 110, 103]','Your radio comes to life and a deep voice says,\n')
+            cprintf('err','    "This is the United States Military. The city has been deemed a national threat and will be destroyed by \n     a nuclear blast at nightfall.')
+            cprintf('err',' All survivors must leave the city before then.”\n')
+            waitgame('*text',3)
+            cprintf('*text','You must escape')
             stage = 2;
+            pause(100)
         % Choice of weapon 
         case 2
             clc
@@ -83,7 +76,6 @@ while stage ~= 0 && timeLeft > 0
             stage = 3;
        
         % Choice Which door to leave through
-        % Ending #1: Be Sure To Listen
         case 3
             clc
             zombiePresent = randi(2);
@@ -112,8 +104,6 @@ while stage ~= 0 && timeLeft > 0
                     if zombiePresent == 1
                         fprintf('Oh no a zombie!')
                         stage = 0;
-                        %win = false;
-                        saveFile(1) = 1;
                     else
                         stage = 4;
                     end
@@ -121,8 +111,6 @@ while stage ~= 0 && timeLeft > 0
                     if zombiePresent == 2
                         fprintf('Oh no a zombie!')
                         stage = 0;
-                        %win = false;
-                        saveFile(1) = 1;
                     else
                         stage = 4;
                     end
@@ -132,7 +120,6 @@ while stage ~= 0 && timeLeft > 0
             end
         
         % Choice Kill Zombie?
-        % Ending #2: Shhhhhh!!!
         case 4 
         clc;
         fprintf('You see there is a zombie outside the other door\n')
@@ -145,7 +132,6 @@ while stage ~= 0 && timeLeft > 0
                 if isequal(weapon,'Gun')
                     fprintf('In killing the zombie you attracted more zombies and died\n')
                     stage = 0;
-                    saveFile(2) = 1;
                 else
                     fprintf('You successfully killed the zombie')
                     haveFirstAidKit = true;
@@ -163,7 +149,6 @@ while stage ~= 0 && timeLeft > 0
         
         
         % How to escape
-        % Ending #3: Hiker
         case 5
         clc;
         fprintf('Now you need to decide how to escape\n\n')
@@ -177,7 +162,6 @@ while stage ~= 0 && timeLeft > 0
                %need to set this up to run down timer with a while timeLeft
                %> 0 loop
                stage = 0;
-               saveFile(3) = 1;
            elseif isequal(transportation,'b')
                fprintf('You look around at some cars, luckily you find one with keys left in the ignition\n')
                stage = 6;
@@ -190,7 +174,6 @@ while stage ~= 0 && timeLeft > 0
         end
         
         % What to do when surrounded in car
-        % Ending #4: Patience Isn't Key
         case 6
             clc;
             fprintf('Your car was loud and attracted a zombie hoard, what do you do?\n\n')
@@ -203,7 +186,6 @@ while stage ~= 0 && timeLeft > 0
                     fprintf('The zombies don''t leave and you sit in the car till the nuke')
                     % Need to add while loop to run down clock
                     stage = 0;
-                    saveFile(4) = 1;
                 elseif isequal(howLeaveCar,'b')
                     fprintf('Your horn attracts a stranger to come save you\n')
                     stage = 7;
@@ -216,10 +198,7 @@ while stage ~= 0 && timeLeft > 0
                 end
             end
             
-        % Help your rescuer?
-        % Ending #5: Zombies aren't Bear
-        %   Because you don't have to run faster then the bear, just your
-        %   friend.  But this is evidently not the case for zombies.
+        % Help your rescuer
         case 7
             clc;
             fprintf('While helping you, the stranger injures himself\n')
@@ -236,7 +215,6 @@ while stage ~= 0 && timeLeft > 0
                    elseif isequal(saveCompanion1,'b')
                        fprintf('Slowed by his injury, you and the stranger both get overun by zombies\n')
                        stage = 0;
-                       saveFile(5) = 1;
                    else
                        saveCompanion1 = 'default';
                    end
@@ -267,7 +245,6 @@ while stage ~= 0 && timeLeft > 0
                 
                     
         % What to do about the zombies in the alley
-        % Ending #6: Knock Knock
         case 9
             clc;
             fprintf('The alley dead ends at a door, you turn around and see zombies approaching\n')
@@ -282,7 +259,6 @@ while stage ~= 0 && timeLeft > 0
                 elseif isequal(alleyZombies,'b')
                     fprintf('You attempt to fight, but there are too many zombies and you die\n')
                     stage = 0;
-                    saveFile(6) = 1;
                 elseif isequal(alleyZombies,'a') 
                     fprintf('The door appears to be locked\n')
                     triedDoor = true;
@@ -297,27 +273,21 @@ while stage ~= 0 && timeLeft > 0
             clc;
             fprintf('A woman gestures you inside the building\n')
             fprintf('Do you speak to them?\n')
-            %Make loop where you can type anything, If you type a certain
-            %thing then easter egg will happen!!!
+            %No choices devloped hear yey
             stage = 11;
         
         % Check if you survive based on your weapon
-        % Ending #7: At least bring a knife
-        %   Because 'Don't bring a knife to a gun fight', but you don't
-        %   have any weapon in this senario
         case 11
             clc;
             if isequal(weapon,'none')
                 fprintf('Zombies break through the door and you all die\n')
                 stage = 0;
-                saveFile(7) = 1;
             else
-                fprintf('The doors break open and a few zombies get through, you kill them with your weapon\n')
+                fprintf('The doors break open and a few zombies get through, you kill them with your weapion\n')
                 stage = 12;
             end
         
         % Choice to save a companion
-        % Ending #8: %The Hard Choice
         case 12
             clc;
             fprintf('You run out of the building and there are zombie everywhere\n')
@@ -332,7 +302,7 @@ while stage ~= 0 && timeLeft > 0
                     stage = 13;
                 elseif isequal(companionChoice,'b')
                     fprintf('You and companion2 successfully escape the horde and get out of columbus\n')
-                    saveFile(8) = 1;
+                    win = 'The Hard Choice';
                     stage = 0;
                 else 
                     companionChoice = 'default';
@@ -340,30 +310,24 @@ while stage ~= 0 && timeLeft > 0
             end
         
         % Fight with companion 1, if you win: win, if you lose: die 
-        % Ending #9: Not Fit
-        % Ending #10: Survival of the Fittest
         case 13
             doYouWinFight = randi(2);
             if doYouWinFight == 1
                 fprintf('You won the fight and successfully escaped\n')
-                saveFile(10) = 1;
+                win = 'Survival of the Fittest';
                 stage = 0;
             else 
                 fprintf('Companion2 won the fight and you died')
                 stage = 0;
-                saveFile(9) = 1;
             end
         
-        % Enter Secret Code
+        % if you had no weapon/machete: fight
         case 14
             clc;
             fprintf('You see a strange pannel')
             stage = 17;
         
         % Choice how to deal with bandit blockade
-        % Ending #11: Best Friends
-        % Ending #12: Don't Fight Alone
-        %   Hint to need a companion
         case 15
             clc;
             fprintf('You continue along the street.  Soon encounter a bandit blockade, what do you do?\n\n')
@@ -373,12 +337,11 @@ while stage ~= 0 && timeLeft > 0
                banditBlockade = getKeyboardInput(zomboid);
                if isequal(banditBlockade,'b') && companion1 == true
                    fprintf('You and your companion escape and live happily ever after')
-                   saveFile(11) = 1;
+                   win = 'Best Friends';
                    stage = 0;
                elseif isequal(banditBlockade,'b')
                     fprintf('The bandits kill you')
                     stage = 0;
-                    saveFile(12) = 1;
                elseif isequal(banditBlockade,'a')
                    fprintf('you sneak around the bandits\n')
                    stage = 16;
@@ -386,9 +349,6 @@ while stage ~= 0 && timeLeft > 0
             end
         
         % How do you want to sneak around the bandits?
-        % Ending #13: Not That Dangerous
-        %   Because even a cornered rat can be dangerous, but it turns out
-        %   that you weren't that dangerous.
         case 16
             clc;
             fprintf('How do you get around the bandits?\n\n')
@@ -397,9 +357,8 @@ while stage ~= 0 && timeLeft > 0
             while isequal(banditSneak,'default')
                 banditSneak = getKeyboardInput(zomboid);
                 if isequal(banditSneak,'a')
-                    fprintf('Bandits hear you in the building and you are cornered and killed\n')
+                    fprintf('There is a zombie in the building and you die\n')
                     stage = 0;
-                    saveFile(13) = 1;
                 elseif isequal(banditSneak,'b')
                     fprintf('You enter the sewers')
                     stage = 14;
@@ -409,10 +368,6 @@ while stage ~= 0 && timeLeft > 0
             end
         
         % Do you save dog
-        % Ending #14: Mans Best Friend
-        % Ending #15: Misothery
-        %   Because Misothery means contempt for animals
-        % Ending #16: Bring Some Bandaids Maybe?
         case 17
             clc;
             fprintf('The sewers are a confusing place, especially in a zombie apocolypse\n')
@@ -424,11 +379,11 @@ while stage ~= 0 && timeLeft > 0
                     dogSave = getKeyboardInput(zomboid);
                     if isequal(dogSave,'a')
                         fprintf('You save the dog with your first aid kit.  The dog leads you out of the sewers, you both escape\n')
-                        saveFile(14) = 1;
+                        win = 'Mans best friend';
                         stage = 0;
                     elseif isequal(dogSave,'b')
                         fprintf('You leave the dog where it is, not wanting unecessary burdens.  You don''t make it out in time\n')
-                        saveFile(15) = 1;
+                        stage = 0;
                     else
                         dogSave = 'default';
                     end
@@ -436,12 +391,11 @@ while stage ~= 0 && timeLeft > 0
             else
                 fprintf('You sit with the dog waiting for the end')
                 stage = 0;
-                saveFile(16) = 1;
             end
             pause(5)
         
-        % Which river branch do you choose to go down
-        % Ending #17: Inevitable Waterfall
+        % Which river branch do you choose to go down other branch may be
+        % fine eventually
         case 18
             clc
             fprintf('There is a branch in the river, which branch will you take?\n\n')
@@ -452,7 +406,6 @@ while stage ~= 0 && timeLeft > 0
                 if isequal(boatBranch,'a')
                     fprintf('The branch has a waterfall?')
                     stage = 0;
-                    saveFile(17) = 1;
                 elseif isequal(boatBranch,'b')
                     fprintf('You enter the second branch')
                     stage = 19;
@@ -461,7 +414,6 @@ while stage ~= 0 && timeLeft > 0
                 end
             end
         % What do you do to survive rough waters
-        % Ending #18: There weren't even Sharks
         case 19 
             clc
             fprintf('The water starts to roughen, what do you do?\n\n')
@@ -472,7 +424,6 @@ while stage ~= 0 && timeLeft > 0
                 if isequal(roughWater,'a')
                     fprintf('The water is too rough and you die')
                     stage = 0;
-                    saveFile(18) = 1;
                 elseif isequal(roughWater,'b')
                     fprintf('You survive the rough water')
                     stage = 20;
@@ -482,7 +433,6 @@ while stage ~= 0 && timeLeft > 0
             end
         
         % What do you do with the damaged raft
-        % Ending #19: SOS
         case 20
             clc;
             fprintf('You boat is damaged and is slowly sinking.  What do you do?\n')
@@ -493,8 +443,7 @@ while stage ~= 0 && timeLeft > 0
                 brokenBoat = getKeyboardInput(zomboid);
                 if isequal(brokenBoat,'a')
                     fprintf('You don''t make it to shore in time and drown\n')
-                    stage = 0; 
-                    saveFile(19) = 1;
+                    stage = 0;                    
                 elseif isequal(brokenBoat,'b')
                     fprintf('you call for help\n')
                     weapon = 'none';
