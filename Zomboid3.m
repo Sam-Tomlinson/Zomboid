@@ -1,4 +1,12 @@
 % Zomboid escape from the City
+% Instructions to play:
+% 1.) If you want to play for the first time, clear your workspace.
+% 2.) increase size of command window to ~3/4 of the screen
+% 3.) When asked for a save file press enter if you do not have one
+
+
+
+
 
 % Check if player has played before.  It will only clear workspace if you
 % haven't played before.  It will also prompt you to input a save file
@@ -6,10 +14,10 @@
 if ~exist('playedBefore','var')
     clear;
     dlgtitle = 'Save File';
-    prompt = 'Input Your Save File';
+    prompt = 'Input Your Save File,  otherwise press ENTER';
     numlines = 1;
     dlgTitle = 'Save File';
-    definput = {'0000000000000000000000000000'};
+    definput = {'00000000000000000000000000000'};
     saveFile = inputdlg(prompt,dlgTitle,numlines,definput);
 end
     
@@ -61,6 +69,8 @@ finalZombies = 'default';
 
 %Debug stuff
 runLevel(zomboid,'blankScreen.txt')
+gameFigure = get(groot,'CurrentFigure');
+movegui(gameFigure,'north');
 
 % Main game loop
 while stage ~= 0 && timeLeft > 0
@@ -75,6 +85,9 @@ while stage ~= 0 && timeLeft > 0
         % Choice of weapon 
         case 2
             clc
+            start(gameClock)
+            clockFigure = get(groot,'CurrentFigure');
+            movegui(clockFigure,'northeast');
             fprintf('Choose a weapon\n\n')
             fprintf(' a.)   Gun\n')
             fprintf(' b.)   Machete\n\n')
@@ -645,7 +658,12 @@ while stage ~= 0 && timeLeft > 0
     end       
 end
 clc;
-for i = 1:27
+
+if timeLeft <= 0
+    saveFile{1}(28) = 1;
+end
+    
+for i = 1:28
     if saveFile{1}(i) == 1
         if sum(i == [8,10,11,14,22,25]) == 1
             cprintf('*comment','%s\n',endings{i,1});
@@ -653,15 +671,18 @@ for i = 1:27
             cprintf('*err','%s\n',endings{i,1});
         end
     else
-        cprintf('*text','%s\n',endings{28,1})
+        cprintf('*text','%s\n',endings{29,1})
     end
 end
-fprintf('Do you want to play again?')
+stop(gameClock);
+delete(gameClock);
+fprintf('\n\nPress ENTER to play again\nPress ESC to exit')
 playAgain = getKeyboardInput(zomboid);
 if isequal(playAgain,'return')
     Zomboid3
 else
     clc;
-    fprintf('Here is your save file, be sure to copy i\n')
-    char(saveFile{1})
+    fprintf('Here is your save file, be sure to copy it\n\n%s\n\n',saveFile{1})
+    close all; clear
+   
 end
