@@ -1,11 +1,17 @@
 % Zomboid escape from the City
 
-% Check if player has played before
-if ~exist('playedBefore')
+% Check if player has played before.  It will only clear workspace if you
+% haven't played before.  It will also prompt you to input a save file
+% which is a 28 long string of 1s and 0s.
+if ~exist('playedBefore','var')
     clear;
     dlgtitle = 'Save File';
-    definput = '0000000';
-    saveFile = inputdlg('Input Your Save File');
+    prompt = 'Input Your Save File';
+    numlines = 1;
+    dlgTitle = 'Save File';
+    definput = {'0000000000000000000000000000'};
+    saveFile = inputdlg(prompt,dlgTitle,numlines,definput);
+end
     
     
 % Start stuff
@@ -14,12 +20,14 @@ zomboid = simpleGameEngine('retro_pack.png',16,16,5);
 clock = simpleGameEngine('retro_pack.png',16,16,5);
 numberIndex = load('numberIndex.txt');
 numberStr = load('numberStr.txt');
+endings = readcell('endings.txt');
 timeLeft = 10;
 gameClock = timer('ExecutionMode','FixedRate');
 set(gameClock,'TimerFcn','timeLeft = gameTimer2(timeLeft,numberIndex,numberStr,clock);');
 
 % Initilizing variables
 stage = 1;
+playedBefore = true;
 win = 'You Died';
 weapon = 'default';
 howLeave = 'default';
@@ -48,7 +56,7 @@ finalZombies = 'default';
 
 
     
-end
+
     
 
 %Debug stuff
@@ -113,7 +121,7 @@ while stage ~= 0 && timeLeft > 0
                         fprintf('Oh no a zombie!')
                         stage = 0;
                         %win = false;
-                        saveFile(1) = 1;
+                        saveFile{1}(1) = 1;
                     else
                         stage = 4;
                     end
@@ -122,7 +130,7 @@ while stage ~= 0 && timeLeft > 0
                         fprintf('Oh no a zombie!')
                         stage = 0;
                         %win = false;
-                        saveFile(1) = 1;
+                        saveFile{1}(1) = 1;
                     else
                         stage = 4;
                     end
@@ -145,7 +153,7 @@ while stage ~= 0 && timeLeft > 0
                 if isequal(weapon,'Gun')
                     fprintf('In killing the zombie you attracted more zombies and died\n')
                     stage = 0;
-                    saveFile(2) = 1;
+                    saveFile{1}(2) = 1;
                 else
                     fprintf('You successfully killed the zombie')
                     haveFirstAidKit = true;
@@ -177,7 +185,7 @@ while stage ~= 0 && timeLeft > 0
                %need to set this up to run down timer with a while timeLeft
                %> 0 loop
                stage = 0;
-               saveFile(3) = 1;
+               saveFile{1}(3) = 1;
            elseif isequal(transportation,'b')
                fprintf('You look around at some cars, luckily you find one with keys left in the ignition\n')
                stage = 6;
@@ -203,7 +211,7 @@ while stage ~= 0 && timeLeft > 0
                     fprintf('The zombies don''t leave and you sit in the car till the nuke')
                     % Need to add while loop to run down clock
                     stage = 0;
-                    saveFile(4) = 1;
+                    saveFile{1}(4) = 1;
                 elseif isequal(howLeaveCar,'b')
                     fprintf('Your horn attracts a stranger to come save you\n')
                     stage = 7;
@@ -236,7 +244,7 @@ while stage ~= 0 && timeLeft > 0
                    elseif isequal(saveCompanion1,'b')
                        fprintf('Slowed by his injury, you and the stranger both get overun by zombies\n')
                        stage = 0;
-                       saveFile(5) = 1;
+                       saveFile{1}(5) = 1;
                    else
                        saveCompanion1 = 'default';
                    end
@@ -282,7 +290,7 @@ while stage ~= 0 && timeLeft > 0
                 elseif isequal(alleyZombies,'b')
                     fprintf('You attempt to fight, but there are too many zombies and you die\n')
                     stage = 0;
-                    saveFile(6) = 1;
+                    saveFile{1}(6) = 1;
                 elseif isequal(alleyZombies,'a') 
                     fprintf('The door appears to be locked\n')
                     triedDoor = true;
@@ -332,7 +340,7 @@ while stage ~= 0 && timeLeft > 0
                     stage = 13;
                 elseif isequal(companionChoice,'b')
                     fprintf('You and companion2 successfully escape the horde and get out of columbus\n')
-                    saveFile(8) = 1;
+                    saveFile{1}(8) = 1;
                     stage = 0;
                 else 
                     companionChoice = 'default';
@@ -346,12 +354,12 @@ while stage ~= 0 && timeLeft > 0
             doYouWinFight = randi(2);
             if doYouWinFight == 1
                 fprintf('You won the fight and successfully escaped\n')
-                saveFile(10) = 1;
+                saveFile{1}(10) = 1;
                 stage = 0;
             else 
                 fprintf('Companion2 won the fight and you died')
                 stage = 0;
-                saveFile(9) = 1;
+                saveFile{1}(9) = 1;
             end
         
         % Enter Secret Code
@@ -373,12 +381,12 @@ while stage ~= 0 && timeLeft > 0
                banditBlockade = getKeyboardInput(zomboid);
                if isequal(banditBlockade,'b') && companion1 == true
                    fprintf('You and your companion escape and live happily ever after')
-                   saveFile(11) = 1;
+                   saveFile{1}(11) = 1;
                    stage = 0;
                elseif isequal(banditBlockade,'b')
                     fprintf('The bandits kill you')
                     stage = 0;
-                    saveFile(12) = 1;
+                    saveFile{1}(12) = 1;
                elseif isequal(banditBlockade,'a')
                    fprintf('you sneak around the bandits\n')
                    stage = 16;
@@ -399,7 +407,7 @@ while stage ~= 0 && timeLeft > 0
                 if isequal(banditSneak,'a')
                     fprintf('Bandits hear you in the building and you are cornered and killed\n')
                     stage = 0;
-                    saveFile(13) = 1;
+                    saveFile{1}(13) = 1;
                 elseif isequal(banditSneak,'b')
                     fprintf('You enter the sewers')
                     stage = 14;
@@ -424,11 +432,11 @@ while stage ~= 0 && timeLeft > 0
                     dogSave = getKeyboardInput(zomboid);
                     if isequal(dogSave,'a')
                         fprintf('You save the dog with your first aid kit.  The dog leads you out of the sewers, you both escape\n')
-                        saveFile(14) = 1;
+                        saveFile{1}(14) = 1;
                         stage = 0;
                     elseif isequal(dogSave,'b')
                         fprintf('You leave the dog where it is, not wanting unecessary burdens.  You don''t make it out in time\n')
-                        saveFile(15) = 1;
+                        saveFile{1}(15) = 1;
                     else
                         dogSave = 'default';
                     end
@@ -436,7 +444,7 @@ while stage ~= 0 && timeLeft > 0
             else
                 fprintf('You sit with the dog waiting for the end')
                 stage = 0;
-                saveFile(16) = 1;
+                saveFile{1}(16) = 1;
             end
             pause(5)
         
@@ -452,7 +460,7 @@ while stage ~= 0 && timeLeft > 0
                 if isequal(boatBranch,'a')
                     fprintf('The branch has a waterfall?')
                     stage = 0;
-                    saveFile(17) = 1;
+                    saveFile{1}(17) = 1;
                 elseif isequal(boatBranch,'b')
                     fprintf('You enter the second branch')
                     stage = 19;
@@ -472,7 +480,7 @@ while stage ~= 0 && timeLeft > 0
                 if isequal(roughWater,'a')
                     fprintf('The water is too rough and you die')
                     stage = 0;
-                    saveFile(18) = 1;
+                    saveFile{1}(18) = 1;
                 elseif isequal(roughWater,'b')
                     fprintf('You survive the rough water')
                     stage = 20;
@@ -494,7 +502,7 @@ while stage ~= 0 && timeLeft > 0
                 if isequal(brokenBoat,'a')
                     fprintf('You don''t make it to shore in time and drown\n')
                     stage = 0; 
-                    saveFile(19) = 1;
+                    saveFile{1}(19) = 1;
                 elseif isequal(brokenBoat,'b')
                     fprintf('you call for help\n')
                     weapon = 'none';
@@ -508,6 +516,10 @@ while stage ~= 0 && timeLeft > 0
             end
         
         % How do you fight the zombie
+        % Ending #20: I used to be a human, then I took a bite too the knee
+        %   I took an arrow to the knee
+        % Ending #21: Who left that there?
+        %   You trip on a banana that a bandit threw at your feet
         case 21
             clc;
             fprintf('Bandits answer your call and decide to save you.\nThey do make you fight against a zombie though\n')
@@ -520,9 +532,11 @@ while stage ~= 0 && timeLeft > 0
                 if isequal(banditZombieFight,'a')
                     fprintf('You punch the zombie, it bites your arm.\n')
                     stage = 0;
+                    saveFile{1}(20) = 1;
                 elseif isequal(banditZombieFight,'b')
                     fprintf('You try and escape but the bandits pin you down and let the zombie kill you.\n')
                     stage = 0;
+                    saveFile{1}(21) = 1;
                 elseif isequal(banditZombieFight,'c')
                     fprintf('You pull a bandit into the ring, and the zombie kills them\n')
                     stage = 22;
@@ -532,6 +546,7 @@ while stage ~= 0 && timeLeft > 0
             end
         
         % Do you join the bandits
+        % Ending #22: Straight up G
         case 22
             clc;
             fprintf('The bandits are so inpressed they offer you a spot in their gang\n\n')
@@ -541,7 +556,7 @@ while stage ~= 0 && timeLeft > 0
                 banditOffer = getKeyboardInput(zomboid);
                 if isequal(banditOffer,'a')
                     fprintf('You join the bandits and terrorize the world for decades to come')
-                    win = 'Straight up g';
+                    saveFile{1}(22) = 1;
                     stage = 0;
                 elseif isequal(banditOffer,'b')
                     fprintf('The bandits are disapointed, but since they are impressed with your skill they let you go\n')
@@ -571,6 +586,8 @@ while stage ~= 0 && timeLeft > 0
             end
         
         % How do you deal with the zombie horde
+        % Ending #23: Charge!!!
+        % Ending #24: Hero to the People
         case 24
             clc;
             fprintf('You decide to help the community, escape the zombie horde.  How?\n\n')
@@ -581,17 +598,25 @@ while stage ~= 0 && timeLeft > 0
                 if isequal(communityZombieHoard,'a')
                     fprintf('You the people to charge the zombies.\n You all die\n')
                     stage = 0;
+                    saveFile{1}(23) = 1;
                 elseif isequal(communityZombieHoard,'b')
                     fprintf('You distract all of the zombie by making a loud noise.\n')
                     fprintf('While you didn''t survive, you did save dozens of people.\n')
                     win = 'Hero to the people';
                     stage = 0;
+                    saveFile{1}(24) = 1;
                 else
                     communityZombieHoard = 'default';
                 end
             end
             
-        % Last path   
+        % Last path  
+        % ending #24: Cold Blooded
+        % ending #25: Well, what difference does it make
+        %   Because you are rude and left the group of people to fend for
+        %   themselves, so you are so immoral you are practically already
+        %   not human, what difference does becoming a zombie make.
+        % ending #26: No Escape
         case 25
             clc;
             fprintf('Ignored the peope in need and continued on your way\n')
@@ -604,12 +629,15 @@ while stage ~= 0 && timeLeft > 0
                     fprintf('You kill the zombies and escape\n')
                     win = 'Cold Blooded';
                     stage = 0;
+                    saveFile{1}(25) = 1;
                 elseif isequal(finalZombies,'a')
                     fprintf('You fail to kill the zombies\n')
                     stage = 0;
+                    saveFile{1}(26) = 1;
                 elseif isequal(finalZombies,'b')
                     fprintf('You don''t make it out in time\n')
                     stage = 0;
+                    saveFile{1}(27) = 1;
                 else
                     finalZombies = 'default';
                 end
@@ -617,4 +645,23 @@ while stage ~= 0 && timeLeft > 0
     end       
 end
 clc;
-fprintf('%s',win)
+for i = 1:27
+    if saveFile{1}(i) == 1
+        if sum(i == [8,10,11,14,22,25]) == 1
+            cprintf('*comment','%s\n',endings{i,1});
+        else
+            cprintf('*err','%s\n',endings{i,1});
+        end
+    else
+        cprintf('*text','%s\n',endings{28,1})
+    end
+end
+fprintf('Do you want to play again?')
+playAgain = getKeyboardInput(zomboid);
+if isequal(playAgain,'return')
+    Zomboid3
+else
+    clc;
+    fprintf('Here is your save file, be sure to copy i\n')
+    char(saveFile{1})
+end
