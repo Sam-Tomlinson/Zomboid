@@ -29,7 +29,7 @@ clock = simpleGameEngine('retro_pack.png',16,16,5);
 numberIndex = load('numberIndex.txt');
 numberStr = load('numberStr.txt');
 endings = readcell('endings.txt');
-timeLeft = 10;
+timeLeft = 300;
 gameClock = timer('ExecutionMode','FixedRate');
 set(gameClock,'TimerFcn','timeLeft = gameTimer2(timeLeft,numberIndex,numberStr,clock);');
 
