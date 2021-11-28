@@ -1,0 +1,3 @@
+fprintf('You haven’t seen the outside of your house since the outbreak started, and the wood planks you put on the\n')
+fprintf('windows keep you from peaking outside. For all you know there could be a horde of zombies waiting.\n')
+fprintf('Should you leave through the front door or the back door? ')

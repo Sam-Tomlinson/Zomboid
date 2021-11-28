@@ -82,14 +82,9 @@ while stage ~= 0 && timeLeft > 0
         case 1
             fprintf('A little over a week ago, patient zero escaped a military laboratory unleashing the zombie virus into your city.\n')
             fprintf('Since then, you have been hunkered down in your house waiting for the military to come to your salvation.\n')
-            fprintf('Your radio comes to life and a deep voice says,\n')
-            pause(.1)
-            fprintf(2,'    "This is the United States Military. The city has been deemed a national \n')
-            pause(.1)
-            fprintf(2, '    threat and will be destroyed by a nuclear blast at nightfall. All survivors must leave the city before then."\n')
+            fprintf('Your radio comes to life and a deep voice says, "This is the United States Military. The city has been deemed a national\n')
+            fprintf('threat and will be destroyed by a nuclear blast at nightfall. All survivors must leave the city before then.”\n')
             waitgame(3)
-            fprintf('\nyou must escape\n\npress any key to continue')
-            getMouseInput(zomboid);
             stage = 2;
         % Choice of weapon 
         case 2
@@ -97,10 +92,9 @@ while stage ~= 0 && timeLeft > 0
             start(gameClock)
             clockFigure = get(groot,'CurrentFigure');
             movegui(clockFigure,'northeast');
-            fprintf('As you are preparing to leave you have a decision to make: should you take your machete or your handgun?\n')
-            fprintf('Both seem essential, but there is only room for one in your pack.\n')
-            fprintf(' [\ba.)   Gun\n')
-            fprintf(' b.)   Machete]\b\n\n')
+            fprintf('Choose a weapon\n\n')
+            fprintf(' a.)   Gun\n')
+            fprintf(' b.)   Machete\n\n')
             while isequal(weapon,'default')
                weapon = getKeyboardInput(zomboid);
                if isequal(weapon,'a')
@@ -118,43 +112,30 @@ while stage ~= 0 && timeLeft > 0
         case 3
             clc
             zombiePresent = randi(2);
-            fprintf('You haven’t seen the outside of your house since the outbreak started, and the wood planks you put on the\n')
-            fprintf('windows keep you from peaking outside. For all you know there could be a horde of zombies waiting.\n')
-            fprintf('Should you leave through the front door or the back door?\n\n')
-            fprintf(' [\ba.)   Listen through left door\n')
+            fprintf('What door should I leave through?\n\n')
+            fprintf(' a.)   Listen through left door\n')
             fprintf(' b.)   Listen through right door\n')
             fprintf(' c.)   Choose left door\n')
-            fprintf(' d.)   Choose right door]\b\n\n')
+            fprintf(' d.)   Choose right door\n\n')
             while isequal(howLeave,'default')
                 howLeave = getKeyboardInput(zomboid);
                 if isequal(howLeave,'a')
                     if zombiePresent == 1
-                        waitgame(randi(5))
-                        fprintf('You hear what sounds like slight shuffling and')
-                        waitgame(1)
-                        fprintf('grunting\n')
+                        fprintf('zombie outside door\n')
                     else
-                        waitgame(randi(5))
-                        fprintf('You hear nothing\n')
+                        fprintf('door is safe\n')
                     end
                     howLeave = 'default';
                 elseif isequal(howLeave,'b')
                     if zombiePresent == 2
-                        waitgame(randi(5))
-                        fprintf('You hear what sounds like slight shuffling and')
-                        waitgame(1)
-                        fprintf('grunting\n')
+                        fprintf('zombie outside door\n')
                     else
-                        waitgame(randi(5))
-                        fprintf('You hear nothing\n')
+                        fprintf('door is safe\n')
                     end
                     howLeave = 'default';
                 elseif isequal(howLeave,'c')
                     if zombiePresent == 1
-                        fprintf('You open the door to walk straight into a zombie. It bites your neck and your scream echoes for miles.\n')
-                        fprintf('Your journey ends as soon as it starts.')
-                        pause(.5)
-                        fprintf(2,'\n\nYou Died')
+                        fprintf('Oh no a zombie!')
                         stage = 0;
                         %win = false;
                         saveFile{1}(1) = 1;
@@ -163,10 +144,7 @@ while stage ~= 0 && timeLeft > 0
                     end
                 elseif isequal(howLeave,'d')
                     if zombiePresent == 2
-                        fprintf('You open the door to walk straight into a zombie. It bites your neck and your scream echoes for miles.\n')
-                        fprintf('Your journey ends as soon as it starts.')
-                        pause(.5)
-                        fprintf(2,'\n\nYou Died')
+                        fprintf('Oh no a zombie!')
                         stage = 0;
                         %win = false;
                         saveFile{1}(1) = 1;
@@ -177,7 +155,6 @@ while stage ~= 0 && timeLeft > 0
                     howLeave = 'default';
                 end
             end
-            pause(3)
         
         % Choice Kill Zombie?
         % Ending #2: Shhhhhh!!!
@@ -709,9 +686,7 @@ if isequal(playAgain,'return')
     Zomboid3
 else
     clc;
-    fprintf('Here is your save file, be sure to copy it.  Don''t forget the spaces\n')
-    savefile = saveFile{1}
- 
+    fprintf('Here is your save file, be sure to copy it\n\n%s\n\n',saveFile{1})
     close all; clear
    
 end
