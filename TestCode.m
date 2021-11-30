@@ -1,2 +1,11 @@
-fprintf('You open the door to walk straight into a zombie. It bites your neck and your scream echoes for miles.\n')
-fprintf('Your journey ends as soon as it starts.')
+zomboid = simpleGameEngine('retro_pack.png',16,16,5);
+martialArts = randi(9,1,5)
+for i = 1:5
+    checkMartial = martialArts(i);
+    checkMartial = num2str(checkMartial);
+    checkMartial = unicode2native(checkMartial);
+    fightMove(i) = getKeyboardInput(zomboid);
+    if (fightMove(i)) ~= checkMartial;
+        break
+    end
+end

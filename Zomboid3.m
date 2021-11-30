@@ -49,6 +49,7 @@ alleyStreet = 'default';
 alleyZombies = 'default';
 triedDoor = false;
 companion2 = true;
+speakToComp = 'default';
 companionChoice = 'default';
 banditBlockade = 'default';
 banditSneak = 'default';
@@ -152,9 +153,10 @@ while stage ~= 0 && timeLeft > 0
                 elseif isequal(howLeave,'c')
                     if zombiePresent == 1
                         fprintf('You open the door to walk straight into a zombie. It bites your neck and your scream echoes for miles.\n')
-                        fprintf('Your journey ends as soon as it starts.')
+                        fprintf('Your journey ends as soon as it starts.\n')
                         pause(.5)
-                        fprintf(2,'\n\nYou Died')
+                        fprintf(2,'\n\nYou Died ')
+                        getMouseInput(zomboid);
                         stage = 0;
                         %win = false;
                         saveFile{1}(1) = 1;
@@ -164,9 +166,10 @@ while stage ~= 0 && timeLeft > 0
                 elseif isequal(howLeave,'d')
                     if zombiePresent == 2
                         fprintf('You open the door to walk straight into a zombie. It bites your neck and your scream echoes for miles.\n')
-                        fprintf('Your journey ends as soon as it starts.')
+                        fprintf('Your journey ends as soon as it starts.\n')
                         pause(.5)
-                        fprintf(2,'\n\nYou Died')
+                        fprintf(2,'\n\nYou Died ')
+                        getMouseInput(zomboid);
                         stage = 0;
                         %win = false;
                         saveFile{1}(1) = 1;
@@ -177,31 +180,38 @@ while stage ~= 0 && timeLeft > 0
                     howLeave = 'default';
                 end
             end
-            pause(3)
         
         % Choice Kill Zombie?
         % Ending #2: Shhhhhh!!!
         case 4 
         clc;
-        fprintf('You see there is a zombie outside the other door\n')
-        fprintf('What do you do?\n\n')
-        fprintf(' a.)   Attack it\n')
-        fprintf(' b.)   Sneak past it\n\n')
+        fprintf('You carefully open the door. It is all clear. You walk outside to notice there is a zombie at the other\n')
+        fprintf('entrance. You were that close to walking into your death. You need to be careful. What should you do\n')
+        fprintf('about the zombie?\n\n')
+        fprintf(' [\ba.)   Attack it\n')
+        fprintf(' b.)   Sneak past it]\b\n\n')
         while isequal(attackDoorZombie,'default')
             attackDoorZombie = getKeyboardInput(zomboid);
             if isequal(attackDoorZombie,'a')
                 if isequal(weapon,'Gun')
-                    fprintf('In killing the zombie you attracted more zombies and died\n')
+                    fprintf('You carefully aim your handgun and shoot. You nail the zombie in the head. Easy kill. Then you hear the\n')
+                    fprintf('noises from all around you. You look to see that you are surrounded by a horde. The gunshot drew at\n')
+                    fprintf('least 20 other zombies over to you. You are torn limb from limb.\n\n')
+                    pause(.5)
+                    fprintf(2,'You Died ')
+                    getMouseInput(zomboid);
                     stage = 0;
                     saveFile{1}(2) = 1;
                 else
-                    fprintf('You successfully killed the zombie')
+                    fprintf('You sneak close to the zombie until you are an arm''s length away and swiftly cut through its head with\n')
+                    fprintf('your machete. You look down at the body to see that it was carrying something.\n\n')
+                    fprintf(2,'First Aid Kit Acquired ')
+                    getMouseInput(zomboid);
                     haveFirstAidKit = true;
                     stage = 5;
                 end
                 
             elseif isequal(attackDoorZombie,'b')
-                fprintf('You successfully snuck past the zombie')
                 stage = 5;
             else 
                 attackDoorZombie = 'default';
@@ -214,23 +224,25 @@ while stage ~= 0 && timeLeft > 0
         % Ending #3: Hiker
         case 5
         clc;
-        fprintf('Now you need to decide how to escape\n\n')
-        fprintf(' a.)   Walk\n')
+        fprintf('As you walk away from your house you must quickly decide how you will escape. You could attempt to\n')
+        fprintf('run on foot, take your car, or steal a boat docked in the nearby river.\n\n')
+        fprintf(' [\ba.)   Walk\n')
         fprintf(' b.)   Take a car\n')
-        fprintf(' c.)   Take a boat\n')
+        fprintf(' c.)   Take a boat]\b\n\n')
         while isequal(transportation,'default')
            transportation = getKeyboardInput(zomboid);
            if isequal(transportation,'a')
-               fprintf('You could not walk out of the city fast enough')
-               %need to set this up to run down timer with a while timeLeft
-               %> 0 loop
+               fprintf('You walk down the street at a swift pace, but the sun begins to set faster than you expected. You move\n')
+               fprintf('faster but you quickly realize that you won’t make it out of the city before nightfall. As the sun sets you\n')
+               fprintf('see the bomb fall, and the bright light that follows its descent.\n\n')
+               pause(timeLeft)
+               fprintf(2,'You Died ')
+               getMouseInput(zomboid);
                stage = 0;
                saveFile{1}(3) = 1;
            elseif isequal(transportation,'b')
-               fprintf('You look around at some cars, luckily you find one with keys left in the ignition\n')
                stage = 6;
            elseif isequal(transportation,'c')
-               fprintf('You spot a boat in the olentangy, you hop in\n')
                stage = 18;
            else
                transportation = 'default';
@@ -241,22 +253,40 @@ while stage ~= 0 && timeLeft > 0
         % Ending #4: Patience Isn't Key
         case 6
             clc;
-            fprintf('Your car was loud and attracted a zombie hoard, what do you do?\n\n')
-            fprintf(' a.)   Wait it out\n')
+            fprintf('You get behind the wheel of your car and drive down the street. You feel you are making great progress.\n')
+            fprintf('You turn a corner and run into a horde of over 30 zombies. They surround your car, and you are unable\n')
+            fprintf('to move forward. What do you do?\n\n')
+            fprintf(' [\ba.)   Wait it out\n')
             fprintf(' b.)   Honk Horn and hope someone hears\n')
-            fprintf(' c.)   Attack the zombies and make a break for it\n\n')
+            fprintf(' c.)   Attack the zombies and make a break for it]\b\n\n')
             while isequal(howLeaveCar,'default')
                 howLeaveCar = getKeyboardInput(zomboid);
                 if isequal(howLeaveCar,'a')
-                    fprintf('The zombies don''t leave and you sit in the car till the nuke')
-                    % Need to add while loop to run down clock
+                    fprintf('You decide to wait and lay low hoping they will ignore you and leave. The next few hours go by and you\n')
+                    fprintf('begin to realize that they will not leave in time.')
+                    pause(timeLeft-.5)
+                    fprintf('The bomb hits you and you perish.\n\n')
+                    fprintf(2,'You Died ')
+                    getMouseInput(zomboid);
                     stage = 0;
                     saveFile{1}(4) = 1;
                 elseif isequal(howLeaveCar,'b')
-                    fprintf('Your horn attracts a stranger to come save you\n')
                     stage = 7;
                 elseif isequal(howLeaveCar,'c')
-                    fprintf('You successfully escape but you lose your weapon\n')
+                    if isequal(weapon,'Gun')
+                        fprintf('You ready yourself with your pistol in hand. You move to the back seat where less zombies are gathered\n')
+                        fprintf('around the car. You take a deep breath and slam the door open. You fire two shots at the closest\n')
+                        fprintf('zombies and push forward. As you book it between the two dead zombies, a third grabs your leg and\n')
+                        fprintf('you fall. You are able to kick it away and escape at the last second, but you dropped your handgun in the\n')
+                        fprintf('process\n\n')
+                    else
+                        fprintf('You ready yourself with your machete in hand. You move to the back seat where less zombies are\n')
+                        fprintf('gathered around the car. You take a deep breath and slam the door open. You kick the first zombie back\n')
+                        fprintf('and cut through the one next to it. You keep slicing through as you go and you break you threw the\n')
+                        fprintf('horde. However, as you slice through the last zombie the blade of your machete separates from the\n')
+                        fprintf('handle making it useless\n\n')
+                    end
+                    getMouseInput(zomboid);
                     weapon = 'none';
                     stage = 8;
                 else
@@ -265,24 +295,35 @@ while stage ~= 0 && timeLeft > 0
             end
             
         % Help your rescuer?
-        % Ending #5: Zombies aren't Bear
+        % Ending #5: Zombies aren't Bears
         %   Because you don't have to run faster then the bear, just your
         %   friend.  But this is evidently not the case for zombies.
         case 7
             clc;
-            fprintf('While helping you, the stranger injures himself\n')
+            fprintf('You honk the car horn hoping that someone will help. You sit there waiting. All of a sudden you here\n')
+            fprintf('rifle shots, and the zombies outside your car window begin dropping. One by one until they are all dead.\n')
+            fprintf('Once the last one is dead you go outside to see a man who is in horrible shape. He has a deep cut in his\n')
+            fprintf('leg that appears to be infected. When you exit the car, he looks at you sternly and asks for first aid. He\n')
+            fprintf('says it''s only fair since he saved you. What do you do?\n')
             if haveFirstAidKit == true
                 fprintf('You have a first aid kit, do you use it to save the stranger?\n\n')
-                fprintf(' a.)   Yes\n')
-                fprintf(' b.)   No\n\n')
+                fprintf(' [\ba.)   Yes\n')
+                fprintf(' b.)   No]\b\n\n')
                 while isequal(saveCompanion1,'default')
                    saveCompanion1 = getKeyboardInput(zomboid);
                    if isequal(saveCompanion1,'a')
-                       fprintf('You use your first aid kit to save the stranger\n')
+                       fprintf('Considering he just saved your life; you are happy to give the first aid kit to the man. As he bandages\n')
+                       fprintf('himself up, he introduces himself as Tyler, and tells you he got cut bad from falling on broken glass. He\n')
+                       fprintf('offers to join you on your escape from the city, and you accept.\n\n')
+                       fprintf(2,'Companion Acquired ')
+                       getMouseInput(zomboid);
                        companion1 = true;
                        stage = 8;
                    elseif isequal(saveCompanion1,'b')
-                       fprintf('Slowed by his injury, you and the stranger both get overun by zombies\n')
+                       fprintf('You decide that you should save the first aid kit for yourself. You never know when you might need it.\n')
+                       fprintf('You tell the man that you can’t help him. “that’s too bad” he says. He pulls his rifle up and shoots you.\n\n')
+                       fprintf(2,'You Died ')
+                       getMouseInput(zomboid);
                        stage = 0;
                        saveFile{1}(5) = 1;
                    else
@@ -290,23 +331,32 @@ while stage ~= 0 && timeLeft > 0
                    end
                 end
             else
-                fprintf('Slowed by his injury, you and the stranger both get overun by zombies\n')
+                fprintf('\nThe man mutters something about a waste of time and bullets. He pulls his rifle up and shoots you.\n\n')
+                fprintf(2,'You Died ')
+                getMouseInput(zomboid);
                 stage = 0;
+                saveFile{1}(5) = 1;
             end
         
         % Which direction to escape in
         case 8
             clc;
-            fprintf('You reach alley do you:\n\n')
-            fprintf(' a.)   enter the alley\n')
-            fprintf(' b.)   continue along the street\n\n')
+            if companion1 == true
+                fprintf('You and Tyler pull yourselves together and must quickly decide which way to take. You could go down\n')
+                fprintf('the street, but there may be more hordes of zombies. Or you could go through the alleys, but if you get\n')
+                fprintf('cornered there is no escape.\n\n')
+            else
+                fprintf('You pull yourself together and must quickly decide which way to take. You could go down the street, but\n')
+                fprintf('there may be more hordes of zombies. Or you could go through the alleys, but if you get cornered there\n')
+                fprintf('is no escape.\n\n')
+            end
+            fprintf(' [\ba.)   enter the alley\n')
+            fprintf(' b.)   continue along the street]\b\n\n')
             while isequal(alleyStreet,'default')
                 alleyStreet = getKeyboardInput(zomboid);
                 if isequal(alleyStreet,'a')
-                    fprintf('You enter the alley\n')
                     stage = 9;
                 elseif isequal(alleyStreet,'b')
-                    fprintf('You continue along the street\n')
                     stage = 15;
                 else
                     alleyStreet = 'default';
@@ -318,21 +368,42 @@ while stage ~= 0 && timeLeft > 0
         % Ending #6: Knock Knock
         case 9
             clc;
+            if companion1 == true
+                fprintf('You decide it is best to take the alley, believing the street will only be more dangerous. You and Tyler\n')
+                fprintf('move quickly but carefully. You pass by a dumpster and an arm grabs your leg. You scream and pull free.\n')
+                fprintf('A zombie crawls out from under the dumpster which Tyler quickly kills, but the noise attracts more\n')
+                fprintf('zombies. You both run to the end of the alley, but it leads to a dead end besides a door that leads to the\n')
+                fprintf('nearby shop. Zombies are fast approaching.\n\n')
+            else
+                fprintf('You decide it is best to take the alley, believing the street will only be more dangerous. You move quickly\n')
+                fprintf('but carefully. You pass by a dumpster and an arm grabs your leg. You scream and pull free. A zombie\n')
+                fprintf('crawls out from under the dumpster and the noise attracts even more. You run to the end of the alley,\n')
+                fprintf('but it leads to a dead end besides a door that leads to the nearby shop. Zombies are fast approaching.\n\n')
+            end
             fprintf('The alley dead ends at a door, you turn around and see zombies approaching\n')
-            fprintf(' a.)   Try the door\n')
-            fprintf(' b.)   Fight the zombies\n\n')
+            fprintf(' [\ba.)   Try the door\n')
+            fprintf(' b.)   Fight the zombies]\b\n\n')
             while isequal(alleyZombies,'default')
                 alleyZombies = getKeyboardInput(zomboid);
                 if isequal(alleyZombies,'a') && triedDoor == true
-                    fprintf('You hear some rustling behind the door and it swings open\n')
+                    fprintf('You keep pulling on the door while banging over and over again. Last second the door swings open and\n')
+                    fprintf('you leap inside.  You look up to see that a woman is your savior. She has a gun pointed in your direction\n')
+                    fprintf('in case you try anything, but you quickly reassure her that you mean no harm. She introduces herself as\n')
+                    fprintf('<strong>Alex</strong> and tells you that zombies are blocking all entrances and she has been stuck here for days.\n')
+                    fprintf('There is nothing to do besides wait.\n\n')
+                    fprintf(2,'Companion two Acquired')
+                    getMouseInput(zomboid);
                     companion2 = true;
                     stage = 10;
                 elseif isequal(alleyZombies,'b')
-                    fprintf('You attempt to fight, but there are too many zombies and you die\n')
+                    fprintf('You begin to fight the zombies, but they just keep coming. Your backs are pushed to the wall, and you\n')
+                    fprintf('cannot keep up with the horde of zombies.\n\n')
+                    fprintf(2,'You Died ')
+                    getMouseInput(zomboid);
                     stage = 0;
                     saveFile{1}(6) = 1;
                 elseif isequal(alleyZombies,'a') 
-                    fprintf('The door appears to be locked\n')
+                    fprintf('You quickly go for the door and try to open it. It is locked. The zombies are only a few feet away.\n')
                     triedDoor = true;
                     alleyZombies = 'default';
                 else
@@ -343,10 +414,22 @@ while stage ~= 0 && timeLeft > 0
         % Speak with the person
         case 10
             clc;
-            fprintf('A woman gestures you inside the building\n')
-            fprintf('Do you speak to them?\n')
-            %Make loop where you can type anything, If you type a certain
-            %thing then easter egg will happen!!!
+            fprintf('Do you talk to Alex or remain silent?\n')
+            fprintf(' [\ba.)   Speak\n')
+            fprintf(' b.)   Remain Silent]\b\n\n')
+            while isequal(speakToComp,'default')
+                speakToComp = getKeyboardInput(zomboid);
+                if isequal(speakToComp,'a')
+                    fprintf('Alex tells you that soon after the outbreak her and her husband took shelter in the store hoping for\n')
+                    fprintf('rescue. A few days later her close friend left to get supplies and never returned. Not long after that zombies\n')
+                    fprintf('crowded the street by the front door leaving her trapped. She says she must leave the city and return to\n')
+                    fprintf('her family outside of town.\n\n')
+                    getMouseInput(zomboid);
+                elseif isequal(speakToComp,'b')
+                else
+                    speakToComp = 'default';
+                end
+            end
             stage = 11;
         
         % Check if you survive based on your weapon
@@ -356,11 +439,17 @@ while stage ~= 0 && timeLeft > 0
         case 11
             clc;
             if isequal(weapon,'none')
-                fprintf('Zombies break through the door and you all die\n')
+                fprintf('The zombies out front must have heard the commotion and have been banging on the front door and\n')
+                fprintf('the windows ever since. The window is beginning to steadily crack. You begin looking for a way out and\n')
+                fprintf('notice a lock on a third entrance behind the counter that leads to the other side of the store, but the key\n')
+                fprintf('is nowhere to be found. As you look around, suddenly you hear the window shatter, and the zombies\n')
+                fprintf('begin flooding in. They attack Alex and tear her apart. You scramble around looking for a way out but\n')
+                fprintf('it is too late. The zombies tear into you.\n\n')
+                fprintf(2,'You Died ')
+                getMouseInput(zomboid);
                 stage = 0;
                 saveFile(7) = 1;
             else
-                fprintf('The doors break open and a few zombies get through, you kill them with your weapon\n')
                 stage = 12;
             end
         
@@ -368,18 +457,65 @@ while stage ~= 0 && timeLeft > 0
         % Ending #8: %The Hard Choice
         case 12
             clc;
-            fprintf('You run out of the building and there are zombie everywhere\n')
-            fprintf('You and your companion are about to get split up do you:\n')
-            fprintf(' a.)   Save companion1\n')
-            fprintf(' b.)   Save companion2\n')
+            fprintf('The zombies out front must have heard the commotion and have been banging on the front door and\n')
+            fprintf('the windows ever since. The window is beginning to steadily crack. You begin looking for a way out and\n')
+            fprintf('notice a lock on a third entrance behind the counter that leads to the other side of the store, but the key\n')
+            fprintf('is nowhere to be found. As you look around, suddenly you hear the window shatter, and the zombies\n')
+            fprintf('begin flooding in. You see the undead going for Tyler and NAME at the same time. You can only save one\n\n')
+            fprintf(' [\ba.)   Save Tyler\n')
+            fprintf(' b.)   Save Alex]\b2\n')
             
             while isequal(companionChoice,'default')
                 companionChoice = getKeyboardInput(zomboid);
                 if isequal(companionChoice,'a')
-                    fprintf('You and companion1 exit the building, but for PLOT only one of you can escape\n')
+                    fprintf('You decide that you must save Tyler considering he has done the same for you. You take your machete\n')
+                    fprintf('and kill the zombies behind him. You hear NAME scream but there is nothing you can do. You and Tyler\n')
+                    fprintf('rush to the back of the store where the locked entrance is. You break the lock with your machete and\n')
+                    fprintf('escape the store. You block the entrance behind you by sliding a pipe lying on the ground through the\n')
+                    fprintf('handles. You look around and realize nightfall will come before the end of the hour. Not enough time to\n')
+                    fprintf('make it out on foot. You then realize there is a bicycle lying in the street. You begin to walk for it until\n')
+                    fprintf('Tyler stops you. He says he is taking it and you can’t stop him. You continue to go for the bike, but Tyler\n')
+                    fprintf('says he is not afraid to kill you for it. He then rushes toward you to attack.\n\n')
+                    fprintf('Time seems to slow as you Tyler approaches. You realize that you will have to quickly recognize the moves\n')
+                    fprintf('he is about to make and respond appropriately.\n')
+                    fprintf('Luckily you have been preparing for this moment all your life.  You have a bunch of martial art moves all numbered\n')
+                    fprintf('and are prepared to use them as soon as you Tyler makes a move\n\n')
+                    fprintf('Type the sequence of numbers you see to win the fight, press any key when you are ready')
+                    getMouseInput(zomboid);
+                    clc;
+                    martialArts = randi(9,1,5)
+                        messUp = false
+                        for i = 1:5
+                            checkMartial = martialArts(i);
+                            checkMartial = num2str(checkMartial);
+                            checkMartial = unicode2native(checkMartial);
+                            fightMove(i) = getKeyboardInput(zomboid);
+                            if (fightMove(i)) ~= checkMartial
+                                messUp = true;
+                                break
+                            end
+                        end
+                        if messUp == true
+                            saveFile{1}(9) = 1;
+                            fprintf('You mess use the wrong move and lose the battle\n\n')
+                            fprintf(2,'You Died ')
+                            getMouseInput(zomboid);
+                        else
+                            saveFile{1}(10) = 1;
+                            fprintf('You preform better than you could have hoped, you quickly hop on the bike and pedal to safety')
+                            getMouseInput(zomboid);
+                        end
+
                     stage = 13;
                 elseif isequal(companionChoice,'b')
-                    fprintf('You and companion2 successfully escape the horde and get out of columbus\n')
+                    fprintf('You leap towards Alex and kill approaching zombies with your machete. You quickly glance towards\n')
+                    fprintf('Tyler and see him be eaten while he looks you dead in the eye. You and NAME rush to the back of the\n')
+                    fprintf('store where the locked entrance is. You begin hitting the lock with your machete. It seems that you\n')
+                    fprintf('won''t get through it in time until it suddenly breaks, allowing you to escape to the backside of the store.\n')
+                    fprintf('You block the entrance behind you by sliding your machete through the handles. You tell Alex that you\n')
+                    fprintf('both need to get moving when she points out a motorcycle on the street. She then pulls out a pair of\n')
+                    fprintf('keys and says she found them behind the counter earlier that day. You both get on and drive away.\n')
+                    getMouseInput(zomboid);
                     saveFile{1}(8) = 1;
                     stage = 0;
                 else 
