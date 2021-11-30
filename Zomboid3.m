@@ -69,7 +69,7 @@ finalZombies = 'default';
     
 
 %Debug stuff
-runLevel(zomboid,'blankScreen.txt')
+runLevel(zomboid,'startCard.txt')
 gameFigure = get(groot,'CurrentFigure');
 movegui(gameFigure,'north');
 
@@ -95,6 +95,7 @@ while stage ~= 0 && timeLeft > 0
         % Choice of weapon 
         case 2
             clc
+            runLevel(zomboid,'Bunker.txt')
             start(gameClock)
             clockFigure = get(groot,'CurrentFigure');
             movegui(clockFigure,'northeast');
@@ -463,7 +464,7 @@ while stage ~= 0 && timeLeft > 0
             fprintf('is nowhere to be found. As you look around, suddenly you hear the window shatter, and the zombies\n')
             fprintf('begin flooding in. You see the undead going for Tyler and NAME at the same time. You can only save one\n\n')
             fprintf(' [\ba.)   Save Tyler\n')
-            fprintf(' b.)   Save Alex]\b2\n')
+            fprintf(' b.)   Save Alex]\b\n')
             
             while isequal(companionChoice,'default')
                 companionChoice = getKeyboardInput(zomboid);
@@ -484,29 +485,30 @@ while stage ~= 0 && timeLeft > 0
                     getMouseInput(zomboid);
                     clc;
                     martialArts = randi(9,1,5)
-                        messUp = false
+                    pause(3);
+                        messUp = false;
                         for i = 1:5
                             checkMartial = martialArts(i);
                             checkMartial = num2str(checkMartial);
                             checkMartial = unicode2native(checkMartial);
                             fightMove(i) = getKeyboardInput(zomboid);
-                            if (fightMove(i)) ~= checkMartial
+                            if fightMove(i) ~= checkMartial
                                 messUp = true;
                                 break
                             end
                         end
-                        if messUp == true
-                            saveFile{1}(9) = 1;
-                            fprintf('You mess use the wrong move and lose the battle\n\n')
-                            fprintf(2,'You Died ')
-                            getMouseInput(zomboid);
-                        else
-                            saveFile{1}(10) = 1;
-                            fprintf('You preform better than you could have hoped, you quickly hop on the bike and pedal to safety')
-                            getMouseInput(zomboid);
-                        end
-
-                    stage = 13;
+                    if messUp == true
+                        saveFile{1}(9) = 1;
+                        fprintf('You mess use the wrong move and lose the battle\n\n')
+                        fprintf(2,'You Died ')
+                        getMouseInput(zomboid);
+                    else
+                        saveFile{1}(10) = 1;
+                        fprintf('You preform better than you could have hoped, you quickly hop on the bike and pedal to safety')
+                        getMouseInput(zomboid);
+                    end
+                    
+                    stage = 0;
                 elseif isequal(companionChoice,'b')
                     fprintf('You leap towards Alex and kill approaching zombies with your machete. You quickly glance towards\n')
                     fprintf('Tyler and see him be eaten while he looks you dead in the eye. You and NAME rush to the back of the\n')
@@ -526,17 +528,17 @@ while stage ~= 0 && timeLeft > 0
         % Fight with companion 1, if you win: win, if you lose: die 
         % Ending #9: Not Fit
         % Ending #10: Survival of the Fittest
-        case 13
-            doYouWinFight = randi(2);
-            if doYouWinFight == 1
-                fprintf('You won the fight and successfully escaped\n')
-                saveFile{1}(10) = 1;
-                stage = 0;
-            else 
-                fprintf('Companion2 won the fight and you died')
-                stage = 0;
-                saveFile{1}(9) = 1;
-            end
+%         case 13
+%             doYouWinFight = randi(2);
+%             if doYouWinFight == 1
+%                 fprintf('You won the fight and successfully escaped\n')
+%                 saveFile{1}(10) = 1;
+%                 stage = 0;
+%             else 
+%                 fprintf('Companion2 won the fight and you died')
+%                 stage = 0;
+%                 saveFile{1}(9) = 1;
+%             end
         
         % Enter Secret Code
         case 14
