@@ -123,58 +123,74 @@ while stage ~= 0 && timeLeft > 0
             fprintf('You haven’t seen the outside of your house since the outbreak started, and the wood planks you put on the\n')
             fprintf('windows keep you from peaking outside. For all you know there could be a horde of zombies waiting.\n')
             fprintf('Should you leave through the front door or the back door?\n\n')
-            fprintf(' [\ba.)   Listen through left door\n')
-            fprintf(' b.)   Listen through right door\n')
-            fprintf(' c.)   Choose left door\n')
-            fprintf(' d.)   Choose right door]\b\n\n')
+            fprintf(' [\ba.)   Listen through front door\n')
+            fprintf(' b.)   Listen through back door\n')
+            fprintf(' c.)   Choose front door\n')
+            fprintf(' d.)   Choose back door]\b\n\n')
             while isequal(howLeave,'default')
                 howLeave = getKeyboardInput(zomboid);
                 if isequal(howLeave,'a')
                     if zombiePresent == 1
+                        runLevel(zomboid,'frontDoorCheck.txt')
                         waitgame(randi(5))
                         fprintf('You hear what sounds like slight shuffling and')
                         waitgame(1)
                         fprintf('grunting\n')
+                        runLevel(zomboid,'Bunker.txt')
                     else
+                        runLevel(zomboid,'frontDoorCheck.txt')
                         waitgame(randi(5))
                         fprintf('You hear nothing\n')
                     end
                     howLeave = 'default';
                 elseif isequal(howLeave,'b')
                     if zombiePresent == 2
+                        runLevel(zomboid,'backDoorCheck.txt')
                         waitgame(randi(5))
                         fprintf('You hear what sounds like slight shuffling and')
                         waitgame(1)
                         fprintf('grunting\n')
+                        runLevel(zomboid,'Bunker.txt')
                     else
+                        runLevel(zomboid,'backDoorCheck.txt')
                         waitgame(randi(5))
                         fprintf('You hear nothing\n')
                     end
                     howLeave = 'default';
                 elseif isequal(howLeave,'c')
                     if zombiePresent == 1
+                        runLevel(zomboid,'frontDoorZombie.txt')
                         fprintf('You open the door to walk straight into a zombie. It bites your neck and your scream echoes for miles.\n')
                         fprintf('Your journey ends as soon as it starts.\n')
                         pause(.5)
                         fprintf(2,'\n\nYou Died ')
+                        runLevel(zomboid,'frontDoorZombieDead.txt')
                         getMouseInput(zomboid);
                         stage = 0;
                         %win = false;
                         saveFile{1}(1) = 1;
                     else
+                        runLevel(zomboid,'frontDoorSafe.txt')
+                        pause(.5)
+                        runLevel(zomboid,'outsideFront.txt')
                         stage = 4;
                     end
                 elseif isequal(howLeave,'d')
                     if zombiePresent == 2
+                        runLevel(zomboid,'backDoorZombie.txt')
                         fprintf('You open the door to walk straight into a zombie. It bites your neck and your scream echoes for miles.\n')
                         fprintf('Your journey ends as soon as it starts.\n')
                         pause(.5)
                         fprintf(2,'\n\nYou Died ')
+                        runLevel(zomboid,'backDoorZombieDead.txt')
                         getMouseInput(zomboid);
                         stage = 0;
                         %win = false;
                         saveFile{1}(1) = 1;
                     else
+                        runLevel(zomboid,'backDoorSafe.txt')
+                        pause(.5)
+                        runLevel(zomboid,'outsideBack.txt')
                         stage = 4;
                     end
                 else
@@ -195,24 +211,44 @@ while stage ~= 0 && timeLeft > 0
             attackDoorZombie = getKeyboardInput(zomboid);
             if isequal(attackDoorZombie,'a')
                 if isequal(weapon,'Gun')
+                    runLevel(zomboid,'outsideGunPre.txt')
                     fprintf('You carefully aim your handgun and shoot. You nail the zombie in the head. Easy kill. Then you hear the\n')
                     fprintf('noises from all around you. You look to see that you are surrounded by a horde. The gunshot drew at\n')
                     fprintf('least 20 other zombies over to you. You are torn limb from limb.\n\n')
                     pause(.5)
+                    runLevel(zomboid,'outsideGunPost.txt')
+                    pause(1)
+                    runLevel(zomboid,'outsideGunPostZom.txt')
+                    pause(.5)
                     fprintf(2,'You Died ')
+                    runLevel(zomboid,'outsideGunPostZomDead.txt')
                     getMouseInput(zomboid);
                     stage = 0;
                     saveFile{1}(2) = 1;
                 else
+                    runLevel(zomboid,'outsideGunPre.txt')
+                    pause(.5)
+                    runLevel(zomboid,'outsideMachetePre.txt')
+                    pause(.5)
                     fprintf('You sneak close to the zombie until you are an arm''s length away and swiftly cut through its head with\n')
                     fprintf('your machete. You look down at the body to see that it was carrying something.\n\n')
                     fprintf(2,'First Aid Kit Acquired ')
+                    runLevel(zomboid,'outsideMachetePost.txt')
                     getMouseInput(zomboid);
                     haveFirstAidKit = true;
+                    runLevel(zomboid,'outsideMachetePostWalk.txt')
+                    pause(.5)
                     stage = 5;
                 end
                 
             elseif isequal(attackDoorZombie,'b')
+                if isequal(howLeave,'c')
+                    runLevel(zomboid,'outsideFrontWalk.txt')
+                    pause(.5)
+                else
+                    runLevel(zomboid,'outsideBackWalk.txt')
+                    pause(.5)
+                end
                 stage = 5;
             else 
                 attackDoorZombie = 'default';
@@ -225,6 +261,7 @@ while stage ~= 0 && timeLeft > 0
         % Ending #3: Hiker
         case 5
         clc;
+        runLevel(zomboid,'crossroads.txt')
         fprintf('As you walk away from your house you must quickly decide how you will escape. You could attempt to\n')
         fprintf('run on foot, take your car, or steal a boat docked in the nearby river.\n\n')
         fprintf(' [\ba.)   Walk\n')
@@ -236,7 +273,20 @@ while stage ~= 0 && timeLeft > 0
                fprintf('You walk down the street at a swift pace, but the sun begins to set faster than you expected. You move\n')
                fprintf('faster but you quickly realize that you won’t make it out of the city before nightfall. As the sun sets you\n')
                fprintf('see the bomb fall, and the bright light that follows its descent.\n\n')
-               pause(timeLeft)
+               while timeLeft > 0
+                    runLevel(zomboid,'crossroadsWalking1.txt')
+                    pause(.2)
+                    runLevel(zomboid,'crossroadsWalking2.txt')
+                    pause(.2)
+                    runLevel(zomboid,'crossroadsWalking3.txt')
+                    pause(.2)
+                    runLevel(zomboid,'crossroadsWalking4.txt')
+                    pause(.2)
+                    runLevel(zomboid,'crossroadsWalking5.txt')
+                    pause(.2)
+                    runLevel(zomboid,'crossroadsWalking6.txt')
+                    pause(.2)
+               end
                fprintf(2,'You Died ')
                getMouseInput(zomboid);
                stage = 0;
@@ -254,6 +304,11 @@ while stage ~= 0 && timeLeft > 0
         % Ending #4: Patience Isn't Key
         case 6
             clc;
+            runLevel(zomboid,'crossroadsCar1.txt')
+            pause(.5)
+            runLevel(zomboid,'crossroadsCar2.txt')
+            pause(.5)
+            runLevel(zomboid,'crossroadsCar2Zombies.txt')
             fprintf('You get behind the wheel of your car and drive down the street. You feel you are making great progress.\n')
             fprintf('You turn a corner and run into a horde of over 30 zombies. They surround your car, and you are unable\n')
             fprintf('to move forward. What do you do?\n\n')
@@ -287,6 +342,12 @@ while stage ~= 0 && timeLeft > 0
                         fprintf('horde. However, as you slice through the last zombie the blade of your machete separates from the\n')
                         fprintf('handle making it useless\n\n')
                     end
+                    runLevel(zomboid,'crossroadsCar2ZombiesEscape1.txt')
+                    pause(.5)
+                    runLevel(zomboid,'crossroadsCar2ZombiesEscape2.txt')
+                    pause(.5)
+                    runLevel(zomboid,'crossroadsCar2ZombiesEscape3.txt')
+                    pause(.5)
                     getMouseInput(zomboid);
                     weapon = 'none';
                     stage = 8;
@@ -301,6 +362,11 @@ while stage ~= 0 && timeLeft > 0
         %   friend.  But this is evidently not the case for zombies.
         case 7
             clc;
+            runLevel(zomboid,'crossroadsCar2ZombiesHonk1.txt')
+            pause(.5)
+            runLevel(zomboid,'crossroadsCar2ZombiesHonk2.txt')
+            pause(.5)
+            runLevel(zomboid,'crossroadsCar2ZombiesHonk3.txt')
             fprintf('You honk the car horn hoping that someone will help. You sit there waiting. All of a sudden you here\n')
             fprintf('rifle shots, and the zombies outside your car window begin dropping. One by one until they are all dead.\n')
             fprintf('Once the last one is dead you go outside to see a man who is in horrible shape. He has a deep cut in his\n')
@@ -324,6 +390,7 @@ while stage ~= 0 && timeLeft > 0
                        fprintf('You decide that you should save the first aid kit for yourself. You never know when you might need it.\n')
                        fprintf('You tell the man that you can’t help him. “that’s too bad” he says. He pulls his rifle up and shoots you.\n\n')
                        fprintf(2,'You Died ')
+                       runLevel(zomboid,'crossroadsCar2ZombiesHonk3Dead.txt')
                        getMouseInput(zomboid);
                        stage = 0;
                        saveFile{1}(5) = 1;
@@ -343,10 +410,12 @@ while stage ~= 0 && timeLeft > 0
         case 8
             clc;
             if companion1 == true
+                runLevel(zomboid,'roadCompChoice.txt')
                 fprintf('You and Tyler pull yourselves together and must quickly decide which way to take. You could go down\n')
                 fprintf('the street, but there may be more hordes of zombies. Or you could go through the alleys, but if you get\n')
                 fprintf('cornered there is no escape.\n\n')
             else
+                runLevel(zomboid,'roadChoice.txt')
                 fprintf('You pull yourself together and must quickly decide which way to take. You could go down the street, but\n')
                 fprintf('there may be more hordes of zombies. Or you could go through the alleys, but if you get cornered there\n')
                 fprintf('is no escape.\n\n')
@@ -370,12 +439,18 @@ while stage ~= 0 && timeLeft > 0
         case 9
             clc;
             if companion1 == true
+                runLevel(zomboid,'alleyComp.txt')
+                pause(.5)
+                runLevel(zomboid,'alleyCompZombies.txt')
                 fprintf('You decide it is best to take the alley, believing the street will only be more dangerous. You and Tyler\n')
                 fprintf('move quickly but carefully. You pass by a dumpster and an arm grabs your leg. You scream and pull free.\n')
                 fprintf('A zombie crawls out from under the dumpster which Tyler quickly kills, but the noise attracts more\n')
                 fprintf('zombies. You both run to the end of the alley, but it leads to a dead end besides a door that leads to the\n')
                 fprintf('nearby shop. Zombies are fast approaching.\n\n')
             else
+                runLevel(zomboid,'alley.txt')
+                pause(.5)
+                runLevel(zomboid,'alleyZombies.txt')
                 fprintf('You decide it is best to take the alley, believing the street will only be more dangerous. You move quickly\n')
                 fprintf('but carefully. You pass by a dumpster and an arm grabs your leg. You scream and pull free. A zombie\n')
                 fprintf('crawls out from under the dumpster and the noise attracts even more. You run to the end of the alley,\n')
@@ -387,12 +462,17 @@ while stage ~= 0 && timeLeft > 0
             while isequal(alleyZombies,'default')
                 alleyZombies = getKeyboardInput(zomboid);
                 if isequal(alleyZombies,'a') && triedDoor == true
+                    if companion1 == true
+                        runLevel(zomboid,'alleyCompZombiesOpen.txt')
+                    else
+                        runLevel(zomboid,'alleyZombiesOpen.txt')
+                    end
                     fprintf('You keep pulling on the door while banging over and over again. Last second the door swings open and\n')
                     fprintf('you leap inside.  You look up to see that a woman is your savior. She has a gun pointed in your direction\n')
                     fprintf('in case you try anything, but you quickly reassure her that you mean no harm. She introduces herself as\n')
                     fprintf('<strong>Alex</strong> and tells you that zombies are blocking all entrances and she has been stuck here for days.\n')
                     fprintf('There is nothing to do besides wait.\n\n')
-                    fprintf(2,'Companion two Acquired')
+                    fprintf(2,'Companion two Acquired ')
                     getMouseInput(zomboid);
                     companion2 = true;
                     stage = 10;
@@ -400,6 +480,11 @@ while stage ~= 0 && timeLeft > 0
                     fprintf('You begin to fight the zombies, but they just keep coming. Your backs are pushed to the wall, and you\n')
                     fprintf('cannot keep up with the horde of zombies.\n\n')
                     fprintf(2,'You Died ')
+                    if companion1 == true
+                        runLevel(zomboid,'alleyCompZombiesDead.txt')
+                    else
+                        runLevel(zomboid,'alleyZombiesDead.txt')
+                    end
                     getMouseInput(zomboid);
                     stage = 0;
                     saveFile{1}(6) = 1;
@@ -415,13 +500,18 @@ while stage ~= 0 && timeLeft > 0
         % Speak with the person
         case 10
             clc;
+            if companion1 == true
+                runLevel(zomboid,'AlleyCompInside.txt')
+            else
+                runLevel(zomboid,'AlleyInside.txt')
+            end
             fprintf('Do you talk to Alex or remain silent?\n')
             fprintf(' [\ba.)   Speak\n')
             fprintf(' b.)   Remain Silent]\b\n\n')
             while isequal(speakToComp,'default')
                 speakToComp = getKeyboardInput(zomboid);
                 if isequal(speakToComp,'a')
-                    fprintf('Alex tells you that soon after the outbreak her and her husband took shelter in the store hoping for\n')
+                    fprintf('Alex tells you that soon after the outbreak her and her friend took shelter in the store hoping for\n')
                     fprintf('rescue. A few days later her close friend left to get supplies and never returned. Not long after that zombies\n')
                     fprintf('crowded the street by the front door leaving her trapped. She says she must leave the city and return to\n')
                     fprintf('her family outside of town.\n\n')
@@ -440,6 +530,9 @@ while stage ~= 0 && timeLeft > 0
         case 11
             clc;
             if isequal(weapon,'none')
+                runLevel(zomboid,'alleyInsideZombies.txt')
+                pause(.5)
+                runLevel(zomboid,'alleyInsideZombiesDead.txt')
                 fprintf('The zombies out front must have heard the commotion and have been banging on the front door and\n')
                 fprintf('the windows ever since. The window is beginning to steadily crack. You begin looking for a way out and\n')
                 fprintf('notice a lock on a third entrance behind the counter that leads to the other side of the store, but the key\n')
@@ -449,7 +542,7 @@ while stage ~= 0 && timeLeft > 0
                 fprintf(2,'You Died ')
                 getMouseInput(zomboid);
                 stage = 0;
-                saveFile(7) = 1;
+                saveFile{1}(7) = 1;
             else
                 stage = 12;
             end
@@ -458,6 +551,7 @@ while stage ~= 0 && timeLeft > 0
         % Ending #8: %The Hard Choice
         case 12
             clc;
+            runLevel(zomboid,'alleyCompInsideZombies.txt')
             fprintf('The zombies out front must have heard the commotion and have been banging on the front door and\n')
             fprintf('the windows ever since. The window is beginning to steadily crack. You begin looking for a way out and\n')
             fprintf('notice a lock on a third entrance behind the counter that leads to the other side of the store, but the key\n')
@@ -486,6 +580,7 @@ while stage ~= 0 && timeLeft > 0
                     clc;
                     martialArts = randi(9,1,5)
                     pause(3);
+                    clc;
                         messUp = false;
                         for i = 1:5
                             checkMartial = martialArts(i);
