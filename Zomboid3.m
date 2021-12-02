@@ -744,12 +744,18 @@ while stage ~= 0 && timeLeft > 0
         case 15
             clc;
             if companion1 == true
+                runLevel(zomboid,'roadComp1.txt')
+                pause(.5)
+                runLevel(zomboid,'roadComp2.txt')
                 fprintf('You decide it is best to take the street, believing going by alley will be too slow.  As Tyler and you make\n')
                 fprintf('your way down the street, you look for another vehicle you both can take to escape. As you crest a hill\n')
                 fprintf('you both notice something bizarre.  There was a line of crashed cars blocking the street and a group of\n')
                 fprintf('people with guns standing around the blockade. They looked like bandits and will most likely respond\n')
                 fprintf('aggressively if provoked. How should you respond?\n\n')
             else
+                runLevel(zomboid,'road1.txt')
+                pause(.5)
+                runLevel(zomboid,'road2.txt')
                 fprintf('You decide it is best to take the street, believing going by alley will be too slow.  As you make your way\n')
                 fprintf('down the street, you look for another vehicle you can take to escape. As you crest a hill you notice\n')
                 fprintf('something bizarre.  There was a line of crashed cars blocking the street and a group of people with guns\n')
@@ -801,6 +807,27 @@ while stage ~= 0 && timeLeft > 0
                     fprintf('You make a break for the buildings near the blockade, and are able to get inside with the bandits on the\n')
                     fprintf('street noticing you. When you go through the door you walk straight into a big rough looking man. Oh\n')
                     fprintf('no another bandit. He raises his gun and shoots\n\n')
+                    if companion1 == true
+                        runLevel(zomboid,'building1Comp.txt')
+                        pause(.5)
+                        runLevel(zomboid,'building2Comp.txt')
+                        pause(.5)
+                        runLevel(zomboid,'building3Comp.txt')
+                        pause(.5)
+                        runLevel(zomboid,'building4Comp.txt')
+                        pause(.5)
+                        runLevel(zomboid,'building5Comp.txt')
+                    else
+                        runLevel(zomboid,'building1.txt')
+                        pause(.5)
+                        runLevel(zomboid,'building2.txt')
+                        pause(.5)
+                        runLevel(zomboid,'building3.txt')
+                        pause(.5)
+                        runLevel(zomboid,'building4.txt')
+                        pause(.5)
+                        runLevel(zomboid,'building5.txt')
+                    end
                     fprintf(2, 'You Died ')
                     getMouseInput(zomboid)
                     stage = 0;
@@ -1105,7 +1132,10 @@ while stage ~= 0 && timeLeft > 0
                     saveFile{1}(26) = 1;
                 elseif isequal(finalZombies,'b')
                     fprintf('You decide it is not worth the risk to fight the zombies and continue to try another way out of the city\n')
-                    fprintf('Originally you weren''t worried ')
+                    fprintf('Originally you weren''t worried about getting away, but as time continued and you coulnd''t leave you\n')
+                    fprintf('realized you made a mistake.\n\n')
+                    fprintf(2,'You Died \n\n')
+                    fprintf('Press any key to continue')
                     stage = 0;
                     saveFile{1}(27) = 1;
                 else
