@@ -387,6 +387,7 @@ while stage ~= 0 && timeLeft > 0
                        fprintf(2,'Companion Acquired ')
                        getMouseInput(zomboid);
                        companion1 = true;
+                       haveFirstAidKit = 'false';
                        stage = 8;
                    elseif isequal(saveCompanion1,'b')
                        fprintf('You decide that you should save the first aid kit for yourself. You never know when you might need it.\n')
@@ -667,17 +668,27 @@ while stage ~= 0 && timeLeft > 0
         case 14
             clc;
             if companion1 == true
+                runLevel(zomboid,'roadComp2Sewers1.txt')
+                pause(.5)
+                runLevel(zomboid,'roadComp2Sewers2.txt')
+                pause(.7)
                 fprintf('You move for the sewers and climb down the manhole with Tyler right behind you. The stench is\n')
                 fprintf('horrible, but you still push forward. You walk down the path believing that this was the best choice until\n')
                 fprintf('the sewers begin to fork into separate paths. With no other street access points in sight, you just make\n')
                 fprintf('turn after turn until you are completely lost. Tyler panics behind you. You pass by a door that has two\n')
                 fprintf('zombies in front of it. Do you choose to fight them or rush past them and continue through the sewers?\n\n')
+                runLevel(zomboid,'sewersComp1.txt')
             else
+                runLevel(zomboid,'road2Sewers1.txt')
+                pause(.5)
+                runLevel(zomboid,'road2Sewers2.txt')
+                pause(.7)
                 fprintf('You move for the sewers and climb down the manhole. The stench is horrible, but you still push\n')
                 fprintf('forward. You walk down the path believing that this was the best choice until the sewers begin to fork\n')
                 fprintf('into separate paths. With no other street access points in sight, you just make turn after turn until you')
                 fprintf('are completely lost. You begin to feel anxious. You pass by a door that has two zombies in front of it. Do\n')
                 fprintf('you choose to fight them or rush past them and continue through the sewers?\n\n')
+                runLevel(zomboid,'sewers1.txt')
             end
             fprintf( '[\b a.)   Fight\n')
             fprintf(' b.)   Continue]\b\n\n')
@@ -688,6 +699,19 @@ while stage ~= 0 && timeLeft > 0
                         fprintf('You and Tyler attack the zombies with your weapons and execute them. You open the door which leads\n')
                         fprintf('to a room with several computer terminals and servers. You are completely confused. You approach a\n')
                         fprintf('terminal that is already on. It simply reads “Input Password:”\n\n')
+                        runLevel(zomboid,'sewersComp1Fight1.txt')
+                        pause(.5)
+                        runLevel(zomboid,'sewersComp1Fight2.txt')
+                        pause(.5)
+                        runLevel(zomboid,'sewersComp1Fight3.txt')
+                        pause(.5)
+                        runLevel(zomboid,'sewersComp1Fight4.txt')
+                        pause(.5)
+                        runLevel(zomboid,'sewersPanelRoom1.txt')
+                        pause(.5)
+                        runLevel(zomboid,'sewersPanelRoom2.txt')
+                        pause(.5)
+                        runLevel(zomboid,'sewersPanelRoom3.txt')
                         fprintf('press any key to continue')
                         getMouseInput(zomboid);
                         clc;
@@ -700,7 +724,7 @@ while stage ~= 0 && timeLeft > 0
                             panelCode(end+1) = panelChoice;
                         end
                         close
-                        if panelCode(1:end-1) == [9 9 2 9]
+                        if length(panelCode) == 4 && panelCode(1:end-1) == [9 9 2 9]
                             fprintf('You input the code. The terminal reads “Correct Password.” The screen then changes to a complicated\n')
                             fprintf('screen with a U.S. Army logo on it. There are numerous files and controls, but one sticks out to you,\n')
                             fprintf('“Abort nuclear launch.” You press it. The terminal reads: “Nuclear Launch aborted. “You are\n')
@@ -709,13 +733,23 @@ while stage ~= 0 && timeLeft > 0
                             getMouseInput(zomboid);
                             stage = 0;
                             saveFile{1}(29) = 1;
-                        elseif panelCode(1:end-1) == [7 7 7]
-                            stage = 17;
                         else
-                            fprintf('The panel flashes red and promptly shuts off, you have no choice but continue along the sewers\n')
+                            fprintf('The panel flashes red and promptly shuts off, you have no choice but continue along the sewers\n\n')
+                            runLevel(zomboid,'sewersPanelRoom2.txt')
+                            pause(.5)
+                            runLevel(zomboid,'sewersPanelRoom1.txt')
+                            pause(.5)
+                            runLevel(zomboid,'sewersComp1Fight4.txt')
+                            fprintf('Press any key to continue')
+                            getMouseInput(zomboid)
                             stage = 17;
                         end
                     else
+                        runLevel(zomboid,'sewers1Fight1.txt')
+                        pause(.5)
+                        runLevel(zomboid,'sewers1Fight2.txt')
+                        pause(.5)
+                        runLevel(zomboid,'sewers1Fight3.txt')
                         fprintf('You ball your fists and punch the first zombie in the head. The other zombie grabs your arm and bites it.\n')
                         fprintf('In hindsight, attacking without a weapon was probably not a good idea.\n\n')
                         fprintf(2,'You Died \n\n')
@@ -775,13 +809,26 @@ while stage ~= 0 && timeLeft > 0
                    fprintf('comprehend the situation. You then realize the last bandit is ready to shoot Tyler. Right before he is able\n')
                    fprintf('to you tackle him saving Tyler’s life. Tyler then shoots him. “Thanks man” Tyler says. You take one of the\n')
                    fprintf('bandits working cars behind the blockade, and drive out of the city with Tyler.\n\n')
+                   runLevel(zomboid,'roadBanditCompFight1.txt')
+                   pause(.5)
+                   runLevel(zomboid,'roadBanditCompFight2.txt')
+                   pause(.5)
+                   runLevel(zomboid,'roadBanditCompFight3.txt')
+                   fprintf('Press any key to continue')
+                   getMouseInput(zomboid)
                    saveFile{1}(11) = 1;
                    stage = 0;
                elseif isequal(banditBlockade,'b')
                     fprintf('You walk directly down the street towards the group of bandits ready to either talk your way through or\n')
                     fprintf('get by with force.  As soon as you get in the groups sight, they point their guns at you. “Give me all your\n')
                     fprintf('belongings.” the man in front orders. You tell him you have nothing. They all open fire.\n\n')
-                    fprintf(2,'You Died ')
+                    runLevel(zomboid,'roadBanditFight1.txt')
+                    pause(.5)
+                    runLevel(zomboid,'roadBanditFight2.txt')
+                    pause(.5)
+                    runLevel(zomboid,'roadBanditFight3.txt')
+                    fprintf(2,'You Died \n\n')
+                    fprintf('Pressk any key to continue')
                     getMouseInput(zomboid)
                     stage = 0;
                     saveFile{1}(12) = 1;
@@ -828,7 +875,8 @@ while stage ~= 0 && timeLeft > 0
                         pause(.5)
                         runLevel(zomboid,'building5.txt')
                     end
-                    fprintf(2, 'You Died ')
+                    fprintf(2, 'You Died \n\n')
+                    fprintf('Press any key to continue')
                     getMouseInput(zomboid)
                     stage = 0;
                     saveFile{1}(13) = 1;
