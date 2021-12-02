@@ -1086,8 +1086,8 @@ while stage ~= 0 && timeLeft > 0
             fprintf('You decide that helping these people would be a waste of time and just end up with everyone dead.\n')
             fprintf('You ignore their pleas and continiue on your way.  You reach the outskirts of the city soon however\n')
             fprintf('blocking your way is a small amount of zombies.  Do you rish fighting them or try to find another way')
-            fprintf(' a.)   Fight the zombies\n')
-            fprintf(' b.)   Find another way out\n\n')
+            fprintf(' [\ba.)   Fight the zombies\n')
+            fprintf(' b.)   Find another way out]\b\n\n')
             while isequal(finalZombies,'default')
                 finalZombies = getKeyboardInput(zomboid);
                 if isequal(finalZombies,'a') && ~isequal(weapon,'none')
@@ -1096,11 +1096,15 @@ while stage ~= 0 && timeLeft > 0
                     stage = 0;
                     saveFile{1}(25) = 1;
                 elseif isequal(finalZombies,'a')
-                    fprintf('You fail to kill the zombies\n')
+                    fprintf('You charge towards the zombies, but unfortunately without a weapon you can not kill the zombies\n\n')
+                    fprintf(2,'You Died \n\n')
+                    fprintf('Press any key to continue')
+                    getMouseInput(zomboid);
                     stage = 0;
                     saveFile{1}(26) = 1;
                 elseif isequal(finalZombies,'b')
-                    fprintf('You don''t make it out in time\n')
+                    fprintf('You decide it is not worth the risk to fight the zombies and continue to try another way out of the city\n')
+                    fprintf('Originally you weren''t worried ')
                     stage = 0;
                     saveFile{1}(27) = 1;
                 else
