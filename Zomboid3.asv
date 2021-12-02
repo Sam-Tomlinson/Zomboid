@@ -875,6 +875,7 @@ while stage ~= 0 && timeLeft > 0
                     stage = 0;
                     saveFile{1}(17) = 1;
                 elseif isequal(boatBranch,'b')
+                    fprintf('You enter the second branch')
                     stage = 19;
                 else
                     boatBranch = 'default';
@@ -884,23 +885,17 @@ while stage ~= 0 && timeLeft > 0
         % Ending #18: There weren't even Sharks
         case 19 
             clc
-            fprintf('You decide to paddle towards the second branch.\n')
-            fprintf('The ride was nice and smooth for the first bit, but it gradually started getting\n')
-            fprintf('rougher until you were in full blown rapids. You raft was not handling it well and felt it was going to tip\n')
-            fprintf('soon. What do you do?\n\n')
-            fprintf(' [\ba.)   Swim for the shore\n')
-            fprintf(' b.)   Brace for impact]\b\n\n')
+            fprintf('The water starts to roughen, what do you do?\n\n')
+            fprintf(' a.)   Swim for the shore\n')
+            fprintf(' b.)   Brace for impact\n\n')
             while isequal(roughWater,'default')
                 roughWater = getKeyboardInput(zomboid);
                 if isequal(roughWater,'a')
-                    fprintf('You jump out and decide to swim for land, but the current is strong. You are barely staying above\n')
-                    fprintf('surface. You hit a rock and go under completely. If only you had a life jacket. \n\n')
-                    fprintf(2,'You Died \n\n')
-                    fprintf('Press any key to continue')
-                    getMouseInput(zomboid);
+                    fprintf('The water is too rough and you die')
                     stage = 0;
                     saveFile{1}(18) = 1;
                 elseif isequal(roughWater,'b')
+                    fprintf('You survive the rough water')
                     stage = 20;
                 else
                     roughWater = 'default';
@@ -911,29 +906,22 @@ while stage ~= 0 && timeLeft > 0
         % Ending #19: SOS
         case 20
             clc;
-            fprintf('You duck into the raft and brace for impact. The raft bounces around the river until it crashes into a\n')
-            fprintf('large rock and you pass out. You wake up on the raft sometime later in calm water. There is debris all\n')
-            fprintf('around you, and your paddle is missing. You have no idea how long you were passed out, but it is getting\n')
-            fprintf('dangerously close to night fall and you are far away enough from the city. To make matter worse, the\n')
-            fprintf('current is pretty much nonexistent. What do you do?\n\n')
-            fprintf(' [\ba.)   Use debri to paddle\n')
+            fprintf('You boat is damaged and is slowly sinking.  What do you do?\n')
+            fprintf(' a.)   Use debri to paddle\n')
             fprintf(' b.)   Call for help\n')
-            fprintf(' c.)   Swim to shore]\b\n\n')
+            fprintf(' c.)   Swim to shore\n\n')
             while isequal(brokenBoat,'default')
                 brokenBoat = getKeyboardInput(zomboid);
                 if isequal(brokenBoat,'a')
-                    fprintf('You reach into the water and grab a piece of wooden debris and start paddling. You do your best to gain\n')
-                    fprintf('speed but the piece of debris might as well have been useless. Your time runs out and you perish by\n')
-                    fprintf('nuclear explosion.\n\n')
-                    fprintf(2,'You Died ')
-                    fprintf('Press any key to continue')
-                    getMouseInput(zomboid);
+                    fprintf('You don''t make it to shore in time and drown\n')
                     stage = 0; 
                     saveFile{1}(19) = 1;
                 elseif isequal(brokenBoat,'b')
+                    fprintf('you call for help\n')
                     weapon = 'none';
                     stage = 21;                    
                 elseif isequal(brokenBoat,'c')
+                    fprintf('The water is less rough and you make it to shore\n')
                     stage = 23;
                 else
                     brokenBoat = 'default';
@@ -947,34 +935,23 @@ while stage ~= 0 && timeLeft > 0
         %   You trip on a banana that a bandit threw at your feet
         case 21
             clc;
-            fprintf('You feel you are out of options and begin screaming for help. In the horizon a small boat comes by and\n')
-            fprintf('heads your way. However, when the boat comes next to your raft, the men aboard look aggressive, and\n')
-            fprintf('dangerous. They pull you aboard and take all of your belongings. This group of bandits then throw you\n')
-            fprintf('down on the deck of the boat. They tell you your life is theirs now and they want you to play a game.\n')
-            fprintf('They then pull up a zombie from below the ship on a leash, and release it in front of you. “Fight this\n')
-            fprintf('zombie, if you survive, we will let you go.” The zombie lunges for you. How do you react?\n\n')
-            fprintf(' [\ba.)   kick it\n')
+            fprintf('Bandits answer your call and decide to save you.\nThey do make you fight against a zombie though\n')
+            fprintf('How do you fight the zombie?\n')
+            fprintf(' a.)   Punch it\n')
             fprintf(' b.)   Try and escape\n')
-            fprintf(' c.)   Attack the bandits]\b\n\n')
+            fprintf(' c.)   Grab a bandit and push them infront of the zombie\n\n')
             while isequal(banditZombieFight,'default')
                 banditZombieFight = getKeyboardInput(zomboid);
                 if isequal(banditZombieFight,'a')
-                    fprintf('You attempt to kick the zombie in the head, but as you do it bites your knee. The zombie then continues\n')
-                    fprintf('past your leg, and bites your neck.\n\n')
-                    fprintf(2,'You Died \n\n')
-                    fprintf('Press any key to continue')
-                    getMouseInput(zomboid);
+                    fprintf('You punch the zombie, it bites your arm.\n')
                     stage = 0;
                     saveFile{1}(20) = 1;
                 elseif isequal(banditZombieFight,'b')
-                    fprintf('You attempt to sprint by the bandits and jump into the river, but instantly the one of the bandits throws\n')
-                    fprintf('his banana at your feet, you trip and fall.  The bandits close in.\n\n')
-                    fprintf(2,'You Died \n\n')
-                    fprintf('press any key to continue')
-                    getMouseInput(zomboid);
+                    fprintf('You try and escape but the bandits pin you down and let the zombie kill you.\n')
                     stage = 0;
                     saveFile{1}(21) = 1;
                 elseif isequal(banditZombieFight,'c')
+                    fprintf('You pull a bandit into the ring, and the zombie kills them\n')
                     stage = 22;
                 else
                     banditZombieFight = 'default';
@@ -985,25 +962,17 @@ while stage ~= 0 && timeLeft > 0
         % Ending #22: Straight up G
         case 22
             clc;
-            fprintf('You grab one of the bandits surrounding you and the zombie, and before he can react, you throw him at\n')
-            fprintf('the zombie. The zombie begins eating the bandit, and completely ignore you. Despite the bloodcurdling\n')
-            fprintf('screams, you approach the scene and finish the zombie off by stomping it with your boot. You then hear\n')
-            fprintf('clapping. You turn to see that the bandit that seems to be the leader is applauding you. “That was\n')
-            fprintf('something else,” he says. “I like your style.” The leader introduces himself as Chris, and the other two\n')
-            fprintf('living bandits as Shreyas and Kevin. He then asks you to stick with them. What do you say?\n\n')
-            fprintf(' [\ba.)   Accept Bandits offer\n')
-            fprintf(' b.)   Decline Bandits offer]\b\n\n')
+            fprintf('The bandits are so inpressed they offer you a spot in their gang\n\n')
+            fprintf(' a.)   Accept Bandits offer\n')
+            fprintf(' b.)   Decline Bandits offer\n\n')
             while isequal(banditOffer,'default')
                 banditOffer = getKeyboardInput(zomboid);
                 if isequal(banditOffer,'a')
-                    fprintf('Chris gives smiles and gives you your stuff back, and shakes your hand firmly. You spend the next few\n')
-                    fprintf('hours waiting outside the city waiting for people to leave. You rob and kill them for their supplies.\n')
-                    fprintf('Survivors fear you and you love the power.\n\n')
-                    fprintf('Press any key to continue')
-                    getMouseInput(zomboid);
+                    fprintf('You join the bandits and terrorize the world for decades to come')
                     saveFile{1}(22) = 1;
                     stage = 0;
                 elseif isequal(banditOffer,'b')
+                    fprintf('The bandits are disapointed, but since they are impressed with your skill they let you go\n')
                     stage = 23;
                 else
                     banditOffer = 'default';
@@ -1013,23 +982,16 @@ while stage ~= 0 && timeLeft > 0
         % Do you help the community
         case 23
             clc;
-            if isequal(banditOffer,'b')
-                 fprintf('"Thats to bad.” Chris says sinisterly. He then kicks you hard in the chest, and you fall into the water.\n')
-            end
-            fprintf('You swim for land, and reach the shore out of breath. You are nowhere near far enough away from the\n')
-            fprintf('city. You walk to a nearby community near in the residential part of the city that is nearby. You hope to\n')
-            fprintf('find a car or something to get away quickly. However, all you find is that all of the residents, families\n')
-            fprintf('with children, are gathered together in a nearby park. They look scared and hopeless. You approach and\n')
-            fprintf('a woman who appears to be in charge comes to you. She introduces herself as Autumn and tells you\b')
-            fprintf('that the community cannot escape because a large horde of zombies is blocking the bridge that is the\n')
-            fprintf('only way out of the city. She says she knows you have no reason to, but begs for your help. What do you do\n\n')
-            fprintf(' [\ba.)   Help them\n')
-            fprintf(' b.)   Carry on your way]\b\n\n')
+            fprintf('You get to the shore and find a large group of people trying to escape.\n\n')
+            fprintf(' a.)   Help them\n')
+            fprintf(' b.)   Carry on your way\n\n')
             while isequal(comunityChoice,'default')
                 comunityChoice = getKeyboardInput(zomboid);
                 if isequal(comunityChoice,'a')
+                    fprintf('You decide to help the people\n')
                     stage = 24;
                 elseif isequal(comunityChoice,'b')
+                    fprintf('You leave without them\n')
                     stage = 25;
                 else
                     comunityChoice = 'default';
@@ -1041,34 +1003,21 @@ while stage ~= 0 && timeLeft > 0
         % Ending #24: Hero to the People
         case 24
             clc;
-            fprintf('You tell her you will do what you can, and walk towards the bridge. When you get there, you see at least\n')
-            fprintf('a hundred zombies gathered. Right before the bridge there is a car that was left with the key in inside.\n')
-            fprintf('You go inside and start the engine. How do you deal with the horde?\n\n')
-            fprintf(' [\ba.)   Drive straight through the horde\n')
-            fprintf(' b.)   Distract the hoard]\b\n\n')
+            fprintf('You decide to help the community, escape the zombie horde.  How?\n\n')
+            fprintf(' a.)   Fight the zombies\n')
+            fprintf(' b.)   Distract the hoard\n\n')
             while isequal(communityZombieHoard,'default')
                 communityZombieHoard = getKeyboardInput(zomboid);
                 if isequal(communityZombieHoard,'a')
-                    fprintf('You drive full speed into the horde hoping to kill the large majority of them, but as soon as you hit the\n')
-                    fprintf('horde, the car stops almost immediately. The dozens of corpses acted like a brick wall. Your car is\n')
-                    fprintf('surrounded, and you are killed\n\n')
-                    fprintf(2,'You Died \n\n')
-                    fprintf('Press any key to continue')
-                    getMouseInput(zomboid);
+                    fprintf('You the people to charge the zombies.\n You all die\n')
                     stage = 0;
                     saveFile{1}(23) = 1;
                 elseif isequal(communityZombieHoard,'b')
-                   fprintf('You honk the horn and get the hordes attention. You begin to drive away slowly as they follow. You get\n')
-                   fprintf('a few miles away when the car engine quits on you. You weren’t able to drive away and now the\n')
-                   fprintf('zombies are to close. You attempt to run away, but one grabs you and bites you on the arm. You pull\n')
-                   fprintf('free and run. You get far enough away that the horde loses you, but it doesn’t change the fact you are\n')
-                   fprintf('bit. You look down the river to see that the community is safely crossing the bridge. At least it wasn''t in\n')
-                   fprintf('vain. The community members are able to escape the city and vow to never forget your sacrifice. You lay\n')
-                   fprintf('against a tree, and watch as the nuke hits your city.\n\n')
-                   fprintf('Press any key to continue')
-                   getMouseInput(zomboid);
-                   stage = 0;
-                   saveFile{1}(24) = 1;
+                    fprintf('You distract all of the zombie by making a loud noise.\n')
+                    fprintf('While you didn''t survive, you did save dozens of people.\n')
+                    win = 'Hero to the people';
+                    stage = 0;
+                    saveFile{1}(24) = 1;
                 else
                     communityZombieHoard = 'default';
                 end
@@ -1083,9 +1032,8 @@ while stage ~= 0 && timeLeft > 0
         % ending #26: No Escape
         case 25
             clc;
-            fprintf('You decide that helping these people would be a waste of time and just end up with everyone dead.\n')
-            fprintf('You ignore their pleas and continiue on your way.  You reach the outskirts of the city soon however\n')
-            fprintf('blocking your way is a small amount of zombies.  Do you rish fighting them or try to find another way')
+            fprintf('Ignored the peope in need and continued on your way\n')
+            fprintf('Right before you can leave columbus there is a group of zombies in the way\n\n')
             fprintf(' a.)   Fight the zombies\n')
             fprintf(' b.)   Find another way out\n\n')
             while isequal(finalZombies,'default')
