@@ -587,14 +587,14 @@ while stage ~= 0 && timeLeft > 0
                     runLevel(zomboid,'alleyCompDeadInsideZombiesSaveEscape4.txt')
                     getMouseInput(zomboid);
                     clc;
-                    fprintf('Luckily you have been preparing for this moment all your life.  You have a bunch of martial art moves all numbered\n')
-                    fprintf('and are prepared to use them as soon as you Tyler makes a move\n\n')
+                    fprintf('Luckily you have been preparing for this moment all your life.  You have a bunch of martial art moves all\n')
+                    fprintf('numbered and are prepared to use them as soon as you Tyler makes a move\n\n')
                     fprintf('Type the sequence of numbers you see to win the fight, press any key when you are ready')
                     getMouseInput(zomboid);
                     clc;
                     martialArts = randi(9,1,5);
                     disp(martialArts)
-                    pause(3);
+                    pause(2);
                     clc;
                         messUp = false;
                         for i = 1:5
@@ -608,12 +608,13 @@ while stage ~= 0 && timeLeft > 0
                         end
                     if messUp == true
                         saveFile{1}(9) = 1;
-                        fprintf('You mess use the wrong move and lose the battle\n\n')
+                        fprintf('You must have used the wrong move and lose the battle\n\n')
                         fprintf(2,'You Died ')
                         getMouseInput(zomboid);
                     else
                         saveFile{1}(10) = 1;
                         fprintf('You preform better than you could have hoped, you quickly hop on the bike and pedal to safety')
+                        runLevel(zomboid,'beatTyler1.txt')
                         getMouseInput(zomboid);
                     end
                     
@@ -638,7 +639,7 @@ while stage ~= 0 && timeLeft > 0
                     fprintf('won''t get through it in time until it suddenly breaks, allowing you to escape to the backside of the store.\n')
                     fprintf('You block the entrance behind you by sliding your machete through the handles. You tell Alex that you\n')
                     fprintf('both need to get moving when she points out a car on the street. She then pulls out a pair of\n')
-                    fprintf('keys and says she found them behind the counter earlier that day. You both get on and drive away.\n')
+                    fprintf('keys and says she found them behind the counter earlier that day. You both get in and drive away.\n')
                     getMouseInput(zomboid);
                     saveFile{1}(8) = 1;
                     stage = 0;
