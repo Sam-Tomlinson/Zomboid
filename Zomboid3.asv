@@ -1367,7 +1367,7 @@ end
 for i = 1:29
     if saveFile{1}(i) == 1
         if sum(i == [8,10,11,14,22,25,29]) == 1
-            fprintf('[\b%s]\b\n',endings{i,1});
+            fprintf('%s\n',endings{i,1});
         else
             fprintf(2,'%s \n',endings{i,1});
         end
