@@ -1,5 +1,5 @@
 zomboid = simpleGameEngine('retro_pack.png',16,16,5);
-
+% 
 % runLevel(zomboid,'roadChoice.txt')
 % pause(.5)
 % runLevel(zomboid,'road1.txt')
@@ -11,7 +11,7 @@ zomboid = simpleGameEngine('retro_pack.png',16,16,5);
 % runLevel(zomboid,'roadBanditFight2.txt')
 % pause(.5)
 % runLevel(zomboid,'roadBanditFight3.txt')
-
+% 
 % runLevel(zomboid,'roadCompChoice.txt')
 % pause(.5)
 % runLevel(zomboid,'roadComp1.txt')
@@ -23,7 +23,7 @@ zomboid = simpleGameEngine('retro_pack.png',16,16,5);
 % runLevel(zomboid,'roadBanditCompFight2.txt')
 % pause(.5)
 % runLevel(zomboid,'roadBanditCompFight3.txt')
-
+% 
 % runLevel(zomboid,'roadCompChoice.txt')
 % pause(.5)
 % runLevel(zomboid,'roadComp1.txt')
@@ -49,21 +49,52 @@ zomboid = simpleGameEngine('retro_pack.png',16,16,5);
 % runLevel(zomboid,'sewersPanelRoom2.txt')
 % pause(.5)
 % runLevel(zomboid,'sewersPanelRoom3.txt')
+% 
+% runLevel(zomboid,'roadChoice.txt')
+% pause(.5)
+% runLevel(zomboid,'road1.txt')
+% pause(.5) 
+% runLevel(zomboid,'road2.txt')
+% pause(.5)
+% runLevel(zomboid,'road2Sewers1.txt')
+% pause(.5)
+% runLevel(zomboid,'road2Sewers2.txt')
+% pause(.5)
+% runLevel(zomboid,'sewers1.txt')
+% pause(.5)
+% runLevel(zomboid,'sewers1Fight1.txt')
+% pause(.5)
+% runLevel(zomboid,'sewers1Fight2.txt')
+% pause(.5)
+% runLevel(zomboid,'sewers1Fight3.txt')
+% 
+% runLevel(zomboid,'sewersComp1Fight4.txt')
+% pause(.5)
+% runLevel(zomboid,'sewersCompWalk1.txt')
+% pause(.5)
+% runLevel(zomboid,'sewersCompWalk2.txt')
+% pause(.5)
+% runLevel(zomboid,'sewersCompWalk3.txt')
+% 
+% runLevel(zomboid,'sewers1.txt')
+% pause(.5)
+% runLevel(zomboid,'sewersWalk1.txt')
+% pause(.5)
+% runLevel(zomboid,'sewersWalk2.txt')
+% pause(.5)
+% runLevel(zomboid,'sewersWalk3.txt')
+% pause(.5)
+% runLevel(zomboid,'sewersWalk4.txt')
+% 
+% for i = 1:3
+%     runLevel(zomboid,'sewersWalk4.txt')
+%     pause(.5)
+%     runLevel(zomboid,'sewersWalk5.txt')
+%     pause(.5)
+%     runLevel(zomboid,'sewersWalk6.txt')
+%     pause(.5)
+% end
+% runLevel(zomboid,'sewersWalk7.txt')
 
-runLevel(zomboid,'roadChoice.txt')
-pause(.5)
-runLevel(zomboid,'road1.txt')
-pause(.5) 
-runLevel(zomboid,'road2.txt')
-pause(.5)
-runLevel(zomboid,'road2Sewers1.txt')
-pause(.5)
-runLevel(zomboid,'road2Sewers2.txt')
-pause(.5)
-runLevel(zomboid,'sewers1.txt')
-pause(.5)
-runLevel(zomboid,'sewers1Fight1.txt')
-pause(.5)
-runLevel(zomboid,'sewers1Fight2.txt')
-pause(.5)
-runLevel(zomboid,'sewers1Fight3.txt')
+
+runLevel(zomboid,'banditBoat4Exchange2.txt')

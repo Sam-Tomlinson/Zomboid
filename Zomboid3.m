@@ -894,10 +894,17 @@ while stage ~= 0 && timeLeft > 0
         % Ending #16: Bring Some Bandaids Maybe?
         case 17
             clc;
-            fprintf('You begin walking for what begins to feel like an eternity. The reality of the situation sets in. You are\n')
-            fprintf('completely lost. Right before you give up, you see something weird. There is a dog that appears to be\n')
-            fprintf('injured. You have no idea how it could have gotten here, but it is.')
             if haveFirstAidKit == true
+                runLevel(zomboid,'sewersWalk1.txt')
+                pause(.5)
+                runLevel(zomboid,'sewersWalk2.txt')
+                pause(.5)
+                runLevel(zomboid,'sewersWalk3.txt')
+                pause(.5)
+                runLevel(zomboid,'sewersWalk4.txt')
+                fprintf('You begin walking for what begins to feel like an eternity. The reality of the situation sets in. You are\n')
+                fprintf('completely lost. Right before you give up, you see something weird. There is a dog that appears to be\n')
+                fprintf('injured. You have no idea how it could have gotten here, but it is.\n')
                 fprintf(' Do you use your first aid kit to save it?\n\n')
                 fprintf(' [\ba.)   Save dog\n')
                 fprintf(' b.)   Don''t save dog ]\b\n\n')
@@ -909,29 +916,76 @@ while stage ~= 0 && timeLeft > 0
                         fprintf('begin to follow the dog. It takes you turn after turn like it knows exactly where it is going. You eventually\n')
                         fprintf('see a light. You emerge from the sewer into an outlet a few miles outside the city. The dog led you away.\n')
                         fprintf('What a good boy.\n\n')
+                        for i = 1:3
+                            runLevel(zomboid,'sewersWalk4.txt')
+                            pause(.5)
+                            runLevel(zomboid,'sewersWalk5.txt')
+                            pause(.5)
+                            runLevel(zomboid,'sewersWalk6.txt')
+                            pause(.5)
+                        end
+                        runLevel(zomboid,'sewersWalk7.txt')
                         fprintf('press any key to continue')
                         getMouseInput(zomboid);
                         saveFile{1}(14) = 1;
                         stage = 0;
                     elseif isequal(dogSave,'b')
                         fprintf('You choose the save the first aid kit for yourself in case you need it. You walk down the sewers making\n')
-                        fprintf('turn after turn. You are stuck down here. The nuke shortly hits and you perish.\n')
+                        fprintf('turn after turn. You are stuck down here. The nuke shortly hits and you perish.\n\n')
+                        for i = 1:5
+                            runLevel(zomboid,'sewersInf1.txt')
+                            pause(.5)
+                            runLevel(zomboid,'sewersInf2.txt')
+                            pause(.5)
+                            runLevel(zomboid,'sewersInf3.txt')
+                            pause(.5)
+                        end
+                        fprintf(2, 'You Died \n\n')
+                        fprintf('Press any key to continue')
+                        getMouseInput(zomboid);
                         saveFile{1}(15) = 1;
+                        stage = 0;
                     else
                         dogSave = 'default';
                     end
                 end
             else
-                fprintf('You sit with the dog waiting for the end')
+                if companion1 == true
+                    runLevel(zomboid,'sewersCompWalk1.txt')
+                    pause(.5)
+                    runLevel(zomboid,'sewersCompWalk2.txt')
+                    pause(.5)
+                    runLevel(zomboid,'sewersCompWalk3.txt')
+                    fprintf('You can''t help the dog, having already used your first aid kit on Tyler, you have no choice but to wait for\n')
+                    fprintf('the end with the dog.\n\n')
+                else
+                    runLevel(zomboid,'sewers1.txt')
+                    pause(.5)
+                    runLevel(zomboid,'sewersWalk1.txt')
+                    pause(.5)
+                    runLevel(zomboid,'sewersWalk2.txt')
+                    pause(.5)
+                    runLevel(zomboid,'sewersWalk3.txt')
+                    pause(.5)
+                    runLevel(zomboid,'sewersWalk4.txt')
+                    fprintf('You can''t save the dog, lost you have no other choice but wait for the end with the dog.\n\n')
+                end
+                fprintf(2,'You Died \n\n')
+                fprintf('Press any key to continue')
+                getMouseInput(zomboid);
                 stage = 0;
                 saveFile{1}(16) = 1;
             end
-            pause(5)
         
         % Which river branch do you choose to go down
         % Ending #17: Inevitable Waterfall
         case 18
             clc
+            runLevel(zomboid,'crossroadsBoat.txt')
+            pause(.5)
+            runLevel(zomboid,'crossroadsBoat2.txt')
+            pause(.5)
+            runLevel(zomboid,'crossroadsBoat3.txt')
             fprintf('You decide to take the boat down the river. Walking would take too long, and the car may attract\n')
             fprintf('unwanted attention.  Unfortunately, none of the boats had the keys left in them, but one of them had\n')
             fprintf('an emergency raft. You considered your situation an emergency, threw it in the water and started\n')
@@ -945,6 +999,11 @@ while stage ~= 0 && timeLeft > 0
                     fprintf('You think nothing of it, but it keeps on getting louder until you realize its a waterfall.  Terror\n')
                     fprintf('slowly builds as you get closer and closer, but there is nothing you can do. You scream as you tumble\n')
                     fprintf('over the falls\n\n')
+                    runLevel(zomboid,'falls1.txt')
+                    pause(.5)
+                    runLevel(zomboid,'falls2.txt')
+                    pause(.5)
+                    runLevel(zomboid,'falls3.txt')
                     fprintf(2,'You Died \n\n')
                     fprintf('Press any key to continue')
                     getMouseInput(zomboid);
@@ -960,6 +1019,9 @@ while stage ~= 0 && timeLeft > 0
         % Ending #18: There weren't even Sharks
         case 19 
             clc
+            runLevel(zomboid,'safeBranch1.txt')
+            pause(.5)
+            runLevel(zomboid,'safeBranch2.txt')
             fprintf('You decide to paddle towards the second branch.\n')
             fprintf('The ride was nice and smooth for the first bit, but it gradually started getting\n')
             fprintf('rougher until you were in full blown rapids. You raft was not handling it well and felt it was going to tip\n')
@@ -971,6 +1033,9 @@ while stage ~= 0 && timeLeft > 0
                 if isequal(roughWater,'a')
                     fprintf('You jump out and decide to swim for land, but the current is strong. You are barely staying above\n')
                     fprintf('surface. You hit a rock and go under completely. If only you had a life jacket. \n\n')
+                    runLevel(zomboid,'roughSwim1.txt')
+                    pause(.5)
+                    runLevel(zomboid,'roughSwim2.txt')
                     fprintf(2,'You Died \n\n')
                     fprintf('Press any key to continue')
                     getMouseInput(zomboid);
@@ -987,6 +1052,9 @@ while stage ~= 0 && timeLeft > 0
         % Ending #19: SOS
         case 20
             clc;
+            runLevel(zomboid,'roughDecision1.txt')
+            pause(.5)
+            runLevel(zomboid,'roughDecision2.txt')
             fprintf('You duck into the raft and brace for impact. The raft bounces around the river until it crashes into a\n')
             fprintf('large rock and you pass out. You wake up on the raft sometime later in calm water. There is debris all\n')
             fprintf('around you, and your paddle is missing. You have no idea how long you were passed out, but it is getting\n')
@@ -1001,6 +1069,7 @@ while stage ~= 0 && timeLeft > 0
                     fprintf('You reach into the water and grab a piece of wooden debris and start paddling. You do your best to gain\n')
                     fprintf('speed but the piece of debris might as well have been useless. Your time runs out and you perish by\n')
                     fprintf('nuclear explosion.\n\n')
+                    runLevel(zomboid,'debri.txt')
                     fprintf(2,'You Died ')
                     fprintf('Press any key to continue')
                     getMouseInput(zomboid);
@@ -1023,6 +1092,15 @@ while stage ~= 0 && timeLeft > 0
         %   You trip on a banana that a bandit threw at your feet
         case 21
             clc;
+            runLevel(zomboid,'boatCall.txt')
+            pause(.5)
+            runLevel(zomboid,'banditBoat1.txt')
+            pause(.5)
+            runLevel(zomboid,'banditBoat2.txt')
+            pause(.5)
+            runLevel(zomboid,'banditBoat3.txt')
+            pause(.5)
+            runLevel(zomboid,'banditBoat4.txt')
             fprintf('You feel you are out of options and begin screaming for help. In the horizon a small boat comes by and\n')
             fprintf('heads your way. However, when the boat comes next to your raft, the men aboard look aggressive, and\n')
             fprintf('dangerous. They pull you aboard and take all of your belongings. This group of bandits then throw you\n')
@@ -1037,6 +1115,7 @@ while stage ~= 0 && timeLeft > 0
                 if isequal(banditZombieFight,'a')
                     fprintf('You attempt to kick the zombie in the head, but as you do it bites your knee. The zombie then continues\n')
                     fprintf('past your leg, and bites your neck.\n\n')
+                    runLevel(zomboid,'banditBoat4Dead.txt')
                     fprintf(2,'You Died \n\n')
                     fprintf('Press any key to continue')
                     getMouseInput(zomboid);
@@ -1045,6 +1124,11 @@ while stage ~= 0 && timeLeft > 0
                 elseif isequal(banditZombieFight,'b')
                     fprintf('You attempt to sprint by the bandits and jump into the river, but instantly the one of the bandits throws\n')
                     fprintf('his banana at your feet, you trip and fall.  The bandits close in.\n\n')
+                    runLevel(zomboid,'banditBoat4Run1.txt')
+                    pause(.5)
+                    runLevel(zomboid,'banditBoat4Run2.txt')
+                    pause(.5)
+                    runLevel(zomboid,'banditBoat4Run3.txt')
                     fprintf(2,'You Died \n\n')
                     fprintf('press any key to continue')
                     getMouseInput(zomboid);
@@ -1061,6 +1145,9 @@ while stage ~= 0 && timeLeft > 0
         % Ending #22: Straight up G
         case 22
             clc;
+            runLevel(zomboid,'banditBoat4Exchange.txt')
+            pause(.5)
+            runLevel(zomboid,'banditBoat4Exchange2.txt')
             fprintf('You grab one of the bandits surrounding you and the zombie, and before he can react, you throw him at\n')
             fprintf('the zombie. The zombie begins eating the bandit, and completely ignore you. Despite the bloodcurdling\n')
             fprintf('screams, you approach the scene and finish the zombie off by stomping it with your boot. You then hear\n')
@@ -1090,8 +1177,16 @@ while stage ~= 0 && timeLeft > 0
         case 23
             clc;
             if isequal(banditOffer,'b')
-                 fprintf('"Thats to bad.” Chris says sinisterly. He then kicks you hard in the chest, and you fall into the water.\n')
+                runLevel(zomboid,'noBandit1.txt')
+                pause(.5)
+                runLevel(zomboid,'noBandit2.txt')
+                fprintf('"Thats to bad.” Chris says sinisterly. He then kicks you hard in the chest, and you fall into the water.\n')
+            else
+                runLevel(zomboid,'roughDecision2Swim.txt')
             end
+            runLevel(zomboid,'community1.txt')
+            pause(.5)
+            runLevel(zomboid,'community2.txt')
             fprintf('You swim for land, and reach the shore out of breath. You are nowhere near far enough away from the\n')
             fprintf('city. You walk to a nearby community near in the residential part of the city that is nearby. You hope to\n')
             fprintf('find a car or something to get away quickly. However, all you find is that all of the residents, families\n')
@@ -1120,6 +1215,15 @@ while stage ~= 0 && timeLeft > 0
             fprintf('You tell her you will do what you can, and walk towards the bridge. When you get there, you see at least\n')
             fprintf('a hundred zombies gathered. Right before the bridge there is a car that was left with the key in inside.\n')
             fprintf('You go inside and start the engine. How do you deal with the horde?\n\n')
+            runLevel(zomboid,'communityHelp1.txt')
+            pause(.5)
+            runLevel(zomboid,'communityHelp2.txt')
+            pause(.5)
+            runLevel(zomboid,'communityHelp3.txt')
+            pause(.5)
+            runLevel(zomboid,'communityHelp4.txt')
+            pause(.5)
+            runLevel(zomboid,'communityHorde.txt')
             fprintf(' [\ba.)   Drive straight through the horde\n')
             fprintf(' b.)   Distract the hoard]\b\n\n')
             while isequal(communityZombieHoard,'default')

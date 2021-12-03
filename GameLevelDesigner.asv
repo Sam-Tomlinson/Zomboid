@@ -1,5 +1,4 @@
 clc; clear; close all;
-
 %Setup simpleGameEngine with retro pack:
 pixelBoard = simpleGameEngine('retro_pack.png',16,16,5);
 tileSelection = simpleGameEngine('retro_pack.png',16,16,5);
