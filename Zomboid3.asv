@@ -604,11 +604,12 @@ while stage ~= 0 && timeLeft > 0
                     fprintf('Luckily you have been preparing for this moment all your life.  You have a bunch of martial art moves all\n')
                     fprintf('numbered and are prepared to use them as soon as you Tyler makes a move\n\n')
                     fprintf('Type the sequence of numbers you see to win the fight, press any key when you are ready')
+                    fprintf('press any
                     getMouseInput(zomboid);
                     clc;
                     martialArts = randi(9,1,5);
                     disp(martialArts)
-                    pause(2);
+                    pause(1.5);
                     clc;
                         messUp = false;
                         for i = 1:5
@@ -1367,7 +1368,7 @@ end
 for i = 1:29
     if saveFile{1}(i) == 1
         if sum(i == [8,10,11,14,22,25,29]) == 1
-            fprintf('%s\n',endings{i,1});
+            fprintf('[\b%s]\b\n',endings{i,1});
         else
             fprintf(2,'%s \n',endings{i,1});
         end

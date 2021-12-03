@@ -390,7 +390,7 @@ while stage ~= 0 && timeLeft > 0
                    saveCompanion1 = getKeyboardInput(zomboid);
                    if isequal(saveCompanion1,'a')
                        fprintf('Considering he just saved your life; you are happy to give the first aid kit to the man. As he bandages\n')
-                       fprintf('himself up, he introduces himself as Tyler, and tells you he got cut bad from falling on broken glass. He\n')
+                       fprintf('himself up, he introduces himself as <strong>Tyler</strong>, and tells you he got cut bad from falling on broken glass. He\n')
                        fprintf('offers to join you on your escape from the city, and you accept.\n\n')
                        fprintf(2,'Companion Acquired ')
                        fprintf('\n\npress any key to continue')
@@ -603,12 +603,13 @@ while stage ~= 0 && timeLeft > 0
                     clc;
                     fprintf('Luckily you have been preparing for this moment all your life.  You have a bunch of martial art moves all\n')
                     fprintf('numbered and are prepared to use them as soon as you Tyler makes a move\n\n')
-                    fprintf('Type the sequence of numbers you see to win the fight, press any key when you are ready')
+                    fprintf('Type the sequence of numbers you see to win the fight, <strong>only start after the numbers dissapear</strong>')
+                    fprintf('press any key to continue')
                     getMouseInput(zomboid);
                     clc;
                     martialArts = randi(9,1,5);
                     disp(martialArts)
-                    pause(2);
+                    pause(1.5);
                     clc;
                         messUp = false;
                         for i = 1:5
@@ -1166,8 +1167,8 @@ while stage ~= 0 && timeLeft > 0
             fprintf('the zombie. The zombie begins eating the bandit, and completely ignore you. Despite the bloodcurdling\n')
             fprintf('screams, you approach the scene and finish the zombie off by stomping it with your boot. You then hear\n')
             fprintf('clapping. You turn to see that the bandit that seems to be the leader is applauding you. “That was\n')
-            fprintf('something else,” he says. “I like your style.” The leader introduces himself as Chris, and the other two\n')
-            fprintf('living bandits as Shreyas and Kevin. He then asks you to stick with them. What do you say?\n\n')
+            fprintf('something else,” he says. “I like your style.” The leader introduces himself as <strong>Chris</strong>, and the other two\n')
+            fprintf('living bandits as <strong>Shreyas</strong> and <strong>Kevin</strong>. He then asks you to stick with them. What do you say?\n\n')
             fprintf(' [\ba.)   Accept Bandits offer\n')
             fprintf(' b.)   Decline Bandits offer]\b\n\n')
             while isequal(banditOffer,'default')
@@ -1205,7 +1206,7 @@ while stage ~= 0 && timeLeft > 0
             fprintf('city. You walk to a nearby community near in the residential part of the city that is nearby. You hope to\n')
             fprintf('find a car or something to get away quickly. However, all you find is that all of the residents, families\n')
             fprintf('with children, are gathered together in a nearby park. They look scared and hopeless. You approach and\n')
-            fprintf('a woman who appears to be in charge comes to you. She introduces herself as Autumn and tells you\n')
+            fprintf('a woman who appears to be in charge comes to you. She introduces herself as <strong>Autumn</strong> and tells you\n')
             fprintf('that the community cannot escape because a large horde of zombies is blocking the bridge that is the\n')
             fprintf('only way out of the city. She says she knows you have no reason to, but begs for your help. What do you do\n\n')
             fprintf(' [\ba.)   Help them\n')
