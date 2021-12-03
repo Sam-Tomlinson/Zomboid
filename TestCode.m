@@ -97,4 +97,59 @@ zomboid = simpleGameEngine('retro_pack.png',16,16,5);
 % runLevel(zomboid,'sewersWalk7.txt')
 
 
-runLevel(zomboid,'banditBoat4Exchange2.txt')
+
+
+
+
+
+
+
+
+
+% 
+% runLevel(zomboid,'communityHelp4.txt')
+% pause(.5)
+% runLevel(zomboid,'communityHorde.txt')
+% pause(.5)
+% runLevel(zomboid,'communityHordeCharge1.txt')
+% pause(.5)
+% runLevel(zomboid,'communityHordeCharge2.txt')
+% pause(.5)
+% runLevel(zomboid,'communityHordeCharge3.txt')
+% 
+% runLevel(zomboid,'communityHelp4.txt')
+% pause(.5)
+% runLevel(zomboid,'communityHorde.txt')
+% pause(.5)
+% runLevel(zomboid,'communityHordeDistract1.txt')
+% pause(.5)
+% runLevel(zomboid,'communityHorde.txt')
+% pause(.5)
+% runLevel(zomboid,'communityHordeDistract2.txt')
+% pause(.5)
+% runLevel(zomboid,'communityHordeDistract3.txt')
+% pause(.5)
+% runLevel(zomboid,'communityHordeDistract4.txt')
+% pause(.5)
+% runLevel(zomboid,'communityHordeDistract5.txt')
+% pause(.5)
+% runLevel(zomboid,'communityHordeDistract6.txt')
+% pause(.5)
+% runLevel(zomboid,'communityHordeDistract7.txt')
+% pause(.5)
+% runLevel(zomboid,'communityHordeDistract8.txt')
+% pause(.5)
+% runLevel(zomboid,'communityHordeDistract9.txt')
+
+runLevel(zomboid,'community2.txt')
+pause(.5)
+runLevel(zomboid,'communityHelp1.txt')
+pause(.5)
+runLevel(zomboid,'communityAbandon1.txt')
+pause(.5)
+runLevel(zomboid,'communityAbandon2.txt')
+pause(.5)
+runLevel(zomboid,'communityAbandon2Fight1.txt')
+pause(.5)
+runLevel(zomboid,'communityAbandon2Fight2.txt')
+pause(.5)
