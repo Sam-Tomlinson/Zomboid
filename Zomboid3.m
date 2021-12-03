@@ -30,7 +30,7 @@ secretPanel = simpleGameEngine('retro_pack.png',16,16,5);
 numberIndex = load('numberIndex.txt');
 numberStr = load('numberStr.txt');
 endings = readcell('endings.txt');
-timeLeft = 300;
+timeLeft = 180;
 gameClock = timer('ExecutionMode','FixedRate');
 set(gameClock,'TimerFcn','timeLeft = gameTimer2(timeLeft,numberIndex,numberStr,clock);');
 
@@ -740,7 +740,7 @@ while stage ~= 0 && timeLeft > 0
                             panelCode(end+1) = panelChoice;
                         end
                         close
-                        if length(panelCode) == 4 && panelCode(1:end-1) == [9 9 2 9]
+                        if length(panelCode) == 5 && panelCode(1:end-1) == [9 9 2 9]
                             fprintf('You input the code. The terminal reads “Correct Password.” The screen then changes to a complicated\n')
                             fprintf('screen with a U.S. Army logo on it. There are numerous files and controls, but one sticks out to you,\n')
                             fprintf('“Abort nuclear launch.” You press it. The terminal reads: “Nuclear Launch aborted. “You are\n')
