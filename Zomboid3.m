@@ -89,9 +89,9 @@ while stage ~= 0 && timeLeft > 0
             pause(.1)
             fprintf(2,'    "This is the United States Military. The city has been deemed a national \n')
             pause(.1)
-            fprintf(2, '    threat and will be destroyed by a nuclear blast at nightfall. All survivors must leave the city before then."\n')
+            fprintf(2, '    threat and will be destroyed by a nuclear blast at nightfall. All survivors must leave the city before then."\n\n')
             waitgame(3)
-            fprintf('\nyou must escape\n\npress any key to continue')
+            fprintf('you must escape\n\npress any key to continue')
             getMouseInput(zomboid);
             stage = 2;
         % Choice of weapon 
@@ -166,6 +166,7 @@ while stage ~= 0 && timeLeft > 0
                         fprintf('Your journey ends as soon as it starts.\n')
                         pause(.5)
                         fprintf(2,'\n\nYou Died ')
+                        fprintf('\n\npress any key to continue')
                         runLevel(zomboid,'frontDoorZombieDead.txt')
                         getMouseInput(zomboid);
                         stage = 0;
@@ -184,6 +185,7 @@ while stage ~= 0 && timeLeft > 0
                         fprintf('Your journey ends as soon as it starts.\n')
                         pause(.5)
                         fprintf(2,'\n\nYou Died ')
+                        fprintf('\n\npress any key to continue')
                         runLevel(zomboid,'backDoorZombieDead.txt')
                         getMouseInput(zomboid);
                         stage = 0;
@@ -214,7 +216,7 @@ while stage ~= 0 && timeLeft > 0
             if isequal(attackDoorZombie,'a')
                 if isequal(weapon,'Gun')
                     runLevel(zomboid,'outsideGunPre.txt')
-                    fprintf('You carefully aim your handgun and shoot. You nail the zombie in the head. Easy kill. Then you hear the\n')
+                    fprintf('You carefully aim your handgun and shoot. You nail the zombie in the head. Easy kill. Then you hear \n')
                     fprintf('noises from all around you. You look to see that you are surrounded by a horde. The gunshot drew at\n')
                     fprintf('least 20 other zombies over to you. You are torn limb from limb.\n\n')
                     pause(.5)
@@ -223,6 +225,7 @@ while stage ~= 0 && timeLeft > 0
                     runLevel(zomboid,'outsideGunPostZom.txt')
                     pause(.5)
                     fprintf(2,'You Died ')
+                    fprintf('\n\npress any key to continue')
                     runLevel(zomboid,'outsideGunPostZomDead.txt')
                     getMouseInput(zomboid);
                     stage = 0;
@@ -235,6 +238,7 @@ while stage ~= 0 && timeLeft > 0
                     fprintf('You sneak close to the zombie until you are an arm''s length away and swiftly cut through its head with\n')
                     fprintf('your machete. You look down at the body to see that it was carrying something.\n\n')
                     fprintf(2,'First Aid Kit Acquired ')
+                    fprintf('\n\npress any key to continue')
                     runLevel(zomboid,'outsideMachetePost.txt')
                     getMouseInput(zomboid);
                     haveFirstAidKit = true;
@@ -290,6 +294,7 @@ while stage ~= 0 && timeLeft > 0
                     pause(.2)
                end
                fprintf(2,'You Died ')
+               fprintf('\n\npress any key to continue')
                getMouseInput(zomboid);
                stage = 0;
                saveFile{1}(3) = 1;
@@ -325,6 +330,7 @@ while stage ~= 0 && timeLeft > 0
                     pause(timeLeft-.5)
                     fprintf('The bomb hits you and you perish.\n\n')
                     fprintf(2,'You Died ')
+                    fprintf('\n\npress any key to continue')
                     getMouseInput(zomboid);
                     stage = 0;
                     saveFile{1}(4) = 1;
@@ -370,7 +376,7 @@ while stage ~= 0 && timeLeft > 0
             pause(.5)
             runLevel(zomboid,'crossroadsCar2ZombiesHonk3.txt')
             fprintf('You honk the car horn hoping that someone will help. You sit there waiting. All of a sudden you here\n')
-            fprintf('rifle shots, and the zombies outside your car window begin dropping. One by one until they are all dead.\n')
+            fprintf('rifle shots, and the zombies outside your car window begin dropping one by one until they are all dead.\n')
             fprintf('Once the last one is dead you go outside to see a man who is in horrible shape. He has a deep cut in his\n')
             fprintf('leg that appears to be infected. When you exit the car, he looks at you sternly and asks for first aid. He\n')
             fprintf('says it''s only fair since he saved you. What do you do?\n')
@@ -385,6 +391,7 @@ while stage ~= 0 && timeLeft > 0
                        fprintf('himself up, he introduces himself as Tyler, and tells you he got cut bad from falling on broken glass. He\n')
                        fprintf('offers to join you on your escape from the city, and you accept.\n\n')
                        fprintf(2,'Companion Acquired ')
+                       fprintf('\n\npress any key to continue')
                        getMouseInput(zomboid);
                        companion1 = true;
                        haveFirstAidKit = 'false';
@@ -393,6 +400,7 @@ while stage ~= 0 && timeLeft > 0
                        fprintf('You decide that you should save the first aid kit for yourself. You never know when you might need it.\n')
                        fprintf('You tell the man that you can’t help him. “that’s too bad” he says. He pulls his rifle up and shoots you.\n\n')
                        fprintf(2,'You Died ')
+                       fprintf('\n\npress any key to continue')
                        runLevel(zomboid,'crossroadsCar2ZombiesHonk3Dead.txt')
                        getMouseInput(zomboid);
                        stage = 0;
@@ -476,6 +484,7 @@ while stage ~= 0 && timeLeft > 0
                     fprintf('<strong>Alex</strong> and tells you that zombies are blocking all entrances and she has been stuck here for days.\n')
                     fprintf('There is nothing to do besides wait.\n\n')
                     fprintf(2,'Companion two Acquired ')
+                    fprintf('\n\npress any key to continue')
                     getMouseInput(zomboid);
                     companion2 = true;
                     stage = 10;
@@ -483,6 +492,7 @@ while stage ~= 0 && timeLeft > 0
                     fprintf('You begin to fight the zombies, but they just keep coming. Your backs are pushed to the wall, and you\n')
                     fprintf('cannot keep up with the horde of zombies.\n\n')
                     fprintf(2,'You Died ')
+                    fprintf('\n\npress any key to continue')
                     if companion1 == true
                         runLevel(zomboid,'alleyCompZombiesDead.txt')
                     else
@@ -536,13 +546,14 @@ while stage ~= 0 && timeLeft > 0
                 runLevel(zomboid,'alleyInsideZombies.txt')
                 pause(.5)
                 runLevel(zomboid,'alleyInsideZombiesDead.txt')
-                fprintf('The zombies out front must have heard the commotion and have been banging on the front door and\n')
+                fprintf('The zombies out front heard the commotion and have been banging on the front door and\n')
                 fprintf('the windows ever since. The window is beginning to steadily crack. You begin looking for a way out and\n')
-                fprintf('notice a lock on a third entrance behind the counter that leads to the other side of the store, but the key\n')
+                fprintf('notice a locked third entrance behind the counter that leads to the other side of the store, but the key\n')
                 fprintf('is nowhere to be found. As you look around, suddenly you hear the window shatter, and the zombies\n')
                 fprintf('begin flooding in. They attack Alex and tear her apart. You scramble around looking for a way out but\n')
                 fprintf('it is too late. The zombies tear into you.\n\n')
                 fprintf(2,'You Died ')
+                fprintf('\n\npress any key to continue')
                 getMouseInput(zomboid);
                 stage = 0;
                 saveFile{1}(7) = 1;
@@ -611,6 +622,7 @@ while stage ~= 0 && timeLeft > 0
                         saveFile{1}(9) = 1;
                         fprintf('You must have used the wrong move and lose the battle\n\n')
                         fprintf(2,'You Died ')
+                        fprintf('\n\npress any key to continue')
                         getMouseInput(zomboid);
                     else
                         saveFile{1}(10) = 1;
@@ -828,7 +840,7 @@ while stage ~= 0 && timeLeft > 0
                     pause(.5)
                     runLevel(zomboid,'roadBanditFight3.txt')
                     fprintf(2,'You Died \n\n')
-                    fprintf('Pressk any key to continue')
+                    fprintf('Press any key to continue')
                     getMouseInput(zomboid)
                     stage = 0;
                     saveFile{1}(12) = 1;
@@ -981,7 +993,7 @@ while stage ~= 0 && timeLeft > 0
         % Ending #17: Inevitable Waterfall
         case 18
             clc
-            runLevel(zomboid,'crossroadsBoat.txt')
+            runLevel(zomboid,'crossroadsBoat1.txt')
             pause(.5)
             runLevel(zomboid,'crossroadsBoat2.txt')
             pause(.5)
@@ -1019,12 +1031,12 @@ while stage ~= 0 && timeLeft > 0
         % Ending #18: There weren't even Sharks
         case 19 
             clc
-            runLevel(zomboid,'safeBranch1.txt')
+            runLevel(zomboid,'saveBranch1.txt')
             pause(.5)
             runLevel(zomboid,'safeBranch2.txt')
             fprintf('You decide to paddle towards the second branch.\n')
             fprintf('The ride was nice and smooth for the first bit, but it gradually started getting\n')
-            fprintf('rougher until you were in full blown rapids. You raft was not handling it well and felt it was going to tip\n')
+            fprintf('rougher until you were in full blown rapids. You raft was not handling it well and you felt it was going to tip\n')
             fprintf('soon. What do you do?\n\n')
             fprintf(' [\ba.)   Swim for the shore\n')
             fprintf(' b.)   Brace for impact]\b\n\n')
@@ -1058,9 +1070,9 @@ while stage ~= 0 && timeLeft > 0
             fprintf('You duck into the raft and brace for impact. The raft bounces around the river until it crashes into a\n')
             fprintf('large rock and you pass out. You wake up on the raft sometime later in calm water. There is debris all\n')
             fprintf('around you, and your paddle is missing. You have no idea how long you were passed out, but it is getting\n')
-            fprintf('dangerously close to night fall and you are far away enough from the city. To make matter worse, the\n')
+            fprintf('dangerously close to night fall and you are not far away enough from the city. To make matter worse, the\n')
             fprintf('current is pretty much nonexistent. What do you do?\n\n')
-            fprintf(' [\ba.)   Use debri to paddle\n')
+            fprintf(' [\ba.)   Use debris to paddle\n')
             fprintf(' b.)   Call for help\n')
             fprintf(' c.)   Swim to shore]\b\n\n')
             while isequal(brokenBoat,'default')
@@ -1191,7 +1203,7 @@ while stage ~= 0 && timeLeft > 0
             fprintf('city. You walk to a nearby community near in the residential part of the city that is nearby. You hope to\n')
             fprintf('find a car or something to get away quickly. However, all you find is that all of the residents, families\n')
             fprintf('with children, are gathered together in a nearby park. They look scared and hopeless. You approach and\n')
-            fprintf('a woman who appears to be in charge comes to you. She introduces herself as Autumn and tells you\b')
+            fprintf('a woman who appears to be in charge comes to you. She introduces herself as Autumn and tells you\n')
             fprintf('that the community cannot escape because a large horde of zombies is blocking the bridge that is the\n')
             fprintf('only way out of the city. She says she knows you have no reason to, but begs for your help. What do you do\n\n')
             fprintf(' [\ba.)   Help them\n')
