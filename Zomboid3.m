@@ -1299,6 +1299,13 @@ while stage ~= 0 && timeLeft > 0
         % ending #26: No Escape
         case 25
             clc;
+            runLevel(zomboid,'community2.txt')
+            pause(.5)
+            runLevel(zomboid,'communityHelp1.txt')
+            pause(.5)
+            runLevel(zomboid,'communityAbandon1.txt')
+            pause(.5)
+            runLevel(zomboid,'communityAbandon2.txt')
             fprintf('You decide that helping these people would be a waste of time and just end up with everyone dead.\n')
             fprintf('You ignore their pleas and continiue on your way.  You reach the outskirts of the city soon however\n')
             fprintf('blocking your way is a small amount of zombies.  Do you rish fighting them or try to find another way')
@@ -1307,11 +1314,19 @@ while stage ~= 0 && timeLeft > 0
             while isequal(finalZombies,'default')
                 finalZombies = getKeyboardInput(zomboid);
                 if isequal(finalZombies,'a') && ~isequal(weapon,'none')
-                    fprintf('You kill the zombies and escape\n')
-                    win = 'Cold Blooded';
+                    runLevel(zomboid,'communityAbandon2Fight1.txt')
+                    pause(.5)
+                    runLevel(zomboid,'communityAbandon2Fight2.txt')
+                    fprintf('You kill the zombie and escape\n\n')
+                    fprintf('Press any button to continue')
+                    getMouseInput(zomboid);
+                    % win = 'Cold Blooded';
                     stage = 0;
                     saveFile{1}(25) = 1;
                 elseif isequal(finalZombies,'a')
+                    runLevel(zomboid,'communityAbandon2Fight1.txt')
+                    pause(.5)
+                    runLevel(zomboid,'communityAbandon2Fight1Dead.txt')
                     fprintf('You charge towards the zombies, but unfortunately without a weapon you can not kill the zombies\n\n')
                     fprintf(2,'You Died \n\n')
                     fprintf('Press any key to continue')
@@ -1322,8 +1337,17 @@ while stage ~= 0 && timeLeft > 0
                     fprintf('You decide it is not worth the risk to fight the zombies and continue to try another way out of the city\n')
                     fprintf('Originally you weren''t worried about getting away, but as time continued and you coulnd''t leave you\n')
                     fprintf('realized you made a mistake.\n\n')
+                    runLevel(zomboid,'communityAbandon2Walk1.txt')
+                    pause(.5)
+                    runLevel(zomboid,'communityAbandon2Walk2.txt')
+                    pause(.5)
+                    runLevel(zomboid,'communityAbandon2Walk3.txt')
+                    pause(.5)
+                    runLevel(zomboid,'communityAbandon2Walk4.txt')
+                    pause(.5)
                     fprintf(2,'You Died \n\n')
                     fprintf('Press any key to continue')
+                    getMouseInput(zomboid)
                     stage = 0;
                     saveFile{1}(27) = 1;
                 else
