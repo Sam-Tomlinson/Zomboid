@@ -624,12 +624,13 @@ while stage ~= 0 && timeLeft > 0
                     if messUp == true
                         saveFile{1}(9) = 1;
                         fprintf('You must have used the wrong move and lose the battle\n\n')
-                        fprintf(2,'You Died ')
+                        fprintf(2,'You Died \n\n')
                         fprintf('\n\npress any key to continue')
                         getMouseInput(zomboid);
                     else
                         saveFile{1}(10) = 1;
-                        fprintf('You preform better than you could have hoped, you quickly hop on the bike and pedal to safety')
+                        fprintf('You preform better than you could have hoped, you quickly hop on the bike and pedal to safety\n\n')
+                        fprintf('press any key to continue')
                         runLevel(zomboid,'beatTyler1.txt')
                         getMouseInput(zomboid);
                     end
