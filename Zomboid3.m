@@ -279,7 +279,7 @@ while stage ~= 0 && timeLeft > 0
                fprintf('You walk down the street at a swift pace, but the sun begins to set faster than you expected. You move\n')
                fprintf('faster but you quickly realize that you won’t make it out of the city before nightfall. As the sun sets you\n')
                fprintf('see the bomb fall, and the bright light that follows its descent.\n\n')
-               while timeLeft > 0
+               for i = 1:5
                     runLevel(zomboid,'crossroadsWalking1.txt')
                     pause(.2)
                     runLevel(zomboid,'crossroadsWalking2.txt')
@@ -327,7 +327,7 @@ while stage ~= 0 && timeLeft > 0
                 if isequal(howLeaveCar,'a')
                     fprintf('You decide to wait and lay low hoping they will ignore you and leave. The next few hours go by and you\n')
                     fprintf('begin to realize that they will not leave in time.')
-                    pause(timeLeft-.5)
+                    pause(10)
                     fprintf('The bomb hits you and you perish.\n\n')
                     fprintf(2,'You Died ')
                     fprintf('\n\npress any key to continue')
@@ -356,6 +356,8 @@ while stage ~= 0 && timeLeft > 0
                     pause(.5)
                     runLevel(zomboid,'crossroadsCar2ZombiesEscape3.txt')
                     pause(.5)
+                    fprintf(2,'%s lost \n\n',weapon)
+                    fprintf('Press any key to continue')
                     getMouseInput(zomboid);
                     weapon = 'none';
                     stage = 8;
@@ -906,6 +908,9 @@ while stage ~= 0 && timeLeft > 0
         % Ending #16: Bring Some Bandaids Maybe?
         case 17
             clc;
+            fprintf('You begin walking for what begins to feel like an eternity. The reality of the situation sets in. You are\n')
+            fprintf('completely lost. Right before you give up, you see something weird. There is a dog that appears to be\n')
+            fprintf('injured. You have no idea how it could have gotten here, but it is.\n')
             if haveFirstAidKit == true
                 runLevel(zomboid,'sewersWalk1.txt')
                 pause(.5)
@@ -914,9 +919,6 @@ while stage ~= 0 && timeLeft > 0
                 runLevel(zomboid,'sewersWalk3.txt')
                 pause(.5)
                 runLevel(zomboid,'sewersWalk4.txt')
-                fprintf('You begin walking for what begins to feel like an eternity. The reality of the situation sets in. You are\n')
-                fprintf('completely lost. Right before you give up, you see something weird. There is a dog that appears to be\n')
-                fprintf('injured. You have no idea how it could have gotten here, but it is.\n')
                 fprintf(' Do you use your first aid kit to save it?\n\n')
                 fprintf(' [\ba.)   Save dog\n')
                 fprintf(' b.)   Don''t save dog ]\b\n\n')
@@ -1308,7 +1310,7 @@ while stage ~= 0 && timeLeft > 0
             runLevel(zomboid,'communityAbandon2.txt')
             fprintf('You decide that helping these people would be a waste of time and just end up with everyone dead.\n')
             fprintf('You ignore their pleas and continiue on your way.  You reach the outskirts of the city soon however\n')
-            fprintf('blocking your way is a small amount of zombies.  Do you rish fighting them or try to find another way')
+            fprintf('blocking your way is a small amount of zombies.  Do you rish fighting them or try to find another way\n\n')
             fprintf(' [\ba.)   Fight the zombies\n')
             fprintf(' b.)   Find another way out]\b\n\n')
             while isequal(finalZombies,'default')
