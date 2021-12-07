@@ -126,8 +126,7 @@ end
 end
 close all;
 
-% Prompt user to title their new level.  Appends .txt to the end of inputed
-% string and save the file.
+% Prompt user to title their new level.  Appends .txt
 saveName = input('What do you want to call this level? ','s');
 saveName = append(saveName,'.txt');
 save(saveName,'yourLevel1','yourLevel2','-ASCII');

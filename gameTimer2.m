@@ -1,5 +1,11 @@
-
 function timeLeft = gameTimer2(timeLeft,numberIndex,numberStr,gameTimer)
+% Function that gets a number, draws the number in terms of minutes:seconds
+% the returns the number -1 
+
+% If time left is greater than 0, convert the time in # seconds to
+% minute:second form, then convert the minutes and seconds to their index
+% in in retro_pack.png.
+% else the vector to display 0:00
     if timeLeft > 0
         minutes = floor(timeLeft/60);
         seconds = mod(timeLeft,60) * .01;
@@ -21,6 +27,8 @@ function timeLeft = gameTimer2(timeLeft,numberIndex,numberStr,gameTimer)
     else
         timeVector = [948 958 948 948];
     end
+    
+% draw the time
     drawScene(gameTimer,timeVector)
 %     movegui(gcf,'northeast')
     timeLeft = timeLeft - 1;

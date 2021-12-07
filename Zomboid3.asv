@@ -81,7 +81,7 @@ movegui(gameFigure,'north');
 
 % Most of the case statements in the loop follow the following format:
 % clear command window
-% runLevel 
+% Run Level 
 % print plot and or instructions
 % While someVar is default
 % set someVar to keyboardInput (from the level)
@@ -1438,12 +1438,7 @@ end
 % exist every second.
 stop(gameClock);
 delete(gameClock);
-% allows for the player to exit or play again, if they play again the
-% program will run again, however since playAgain now exists it will no
-% longer prompt the user for a saveFile.  Otherwise the saveFile will be
-% printed to screen.  There is an unusual quirk where in MATLAB R2021b
-% instead of printing '1' it will print ' ' in previous versions it would
-% print '□'.
+% allows for the player to exit or pla
 fprintf('\n\nPress ENTER to play again\nPress ESC to exit')
 playAgain = getKeyboardInput(zomboid);
 if isequal(playAgain,'return')
