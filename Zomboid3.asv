@@ -81,7 +81,7 @@ movegui(gameFigure,'north');
 
 % Most of the case statements in the loop follow the following format:
 % clear command window
-% Run Level 
+% runLevel 
 % print plot and or instructions
 % While someVar is default
 % set someVar to keyboardInput (from the level)
@@ -90,6 +90,20 @@ movegui(gameFigure,'north');
 % (keypress or mouse click).
 % If the player found an ending there will also be a line of code that sets the
 % savefile for that ending to 1.
+
+% You may notice some of the fprintf statements have some unusual
+% characters.  
+% fprintf('some text') is normal black text
+% fprintf(2,'some text ') is red text
+% fprintf('[\bsome text]\b') is orange text
+% fprintf('<strong>some text<\strong>') is bold.  The <strong></strong> can
+% be combined with normal black text, red text and orange text. 
+% Normal black text is for most of the fprintf statements.
+% Red text is for when you died, acquired or lost an item, and endings 
+%   Where you died.
+% Orange text is for the options you have and for endings where you
+%   survived.
+% Bold normal text is for introducing new characters.
 
 % All of the while loop have a if-elseif-else statement to determine the
 % what to do debending on the key pressed.  the else statement will set the
@@ -1438,7 +1452,12 @@ end
 % exist every second.
 stop(gameClock);
 delete(gameClock);
-% allows for the player to exit or pla
+% allows for the player to exit or play again, if they play again the
+% program will run again, however since playAgain now exists it will no
+% longer prompt the user for a saveFile.  Otherwise the saveFile will be
+% printed to screen.  There is an unusual quirk where in MATLAB R2021b
+% instead of printing '1' it will print ' ' in previous versions it would
+% print '□'.
 fprintf('\n\nPress ENTER to play again\nPress ESC to exit')
 playAgain = getKeyboardInput(zomboid);
 if isequal(playAgain,'return')

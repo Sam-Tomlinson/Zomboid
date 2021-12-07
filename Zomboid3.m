@@ -61,7 +61,7 @@ roughWater = 'default';
 brokenBoat = 'default';
 banditZombieFight = 'default';
 banditOffer = 'default';
-comunityChoice = 'default';
+communityChoice = 'default';
 communityZombieHoard = 'default';
 finalZombies = 'default';
 
@@ -90,6 +90,20 @@ movegui(gameFigure,'north');
 % (keypress or mouse click).
 % If the player found an ending there will also be a line of code that sets the
 % savefile for that ending to 1.
+
+% You may notice some of the fprintf statements have some unusual
+% characters.  
+% fprintf('some text') is normal black text
+% fprintf(2,'some text ') is red text
+% fprintf('[\bsome text]\b') is orange text
+% fprintf('<strong>some text<\strong>') is bold.  The <strong></strong> can
+% be combined with normal black text, red text and orange text. 
+% Normal black text is for most of the fprintf statements.
+% Red text is for when you died, acquired or lost an item, and endings 
+%   Where you died.
+% Orange text is for the options you have and for endings where you
+%   survived.
+% Bold normal text is for introducing new characters.
 
 % All of the while loop have a if-elseif-else statement to determine the
 % what to do debending on the key pressed.  the else statement will set the
@@ -1255,14 +1269,14 @@ while stage ~= 0 && timeLeft > 0
             fprintf('only way out of the city. She says she knows you have no reason to, but begs for your help. What do you do\n\n')
             fprintf(' [\ba.)   Help them\n')
             fprintf(' b.)   Carry on your way]\b\n\n')
-            while isequal(comunityChoice,'default')
-                comunityChoice = getKeyboardInput(zomboid);
-                if isequal(comunityChoice,'a')
+            while isequal(communityChoice,'default')
+                communityChoice = getKeyboardInput(zomboid);
+                if isequal(communityChoice,'a')
                     stage = 24;
-                elseif isequal(comunityChoice,'b')
+                elseif isequal(communityChoice,'b')
                     stage = 25;
                 else
-                    comunityChoice = 'default';
+                    communityChoice = 'default';
                 end
             end
         
