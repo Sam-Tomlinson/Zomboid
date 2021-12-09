@@ -363,16 +363,13 @@ while stage ~= 0 && timeLeft > 0
                 if isequal(howLeaveCar,'a')
                     fprintf('You decide to wait and lay low hoping they will ignore you and leave. The next few hours go by and you\n')
                     fprintf('begin to realize that they will not leave in time.')
-%                     timeLeft2 = timeLeft
                     stop(gameClock);
-%                     timeLeft = timeLeft2;
                     set(gameClock,'Period',0.05);
                     start(gameClock);
                     while timeLeft >= 0
-                        
-                        pause(1)
+                        runLevel(zomboid,'')
                     end
-                    fprintf('\nThe bomb hits you and you perish.\n\n')
+                    fprintf('The bomb hits you and you perish.\n\n')
                     fprintf(2,'You Died ')
                     fprintf('\n\npress any key to continue')
                     getMouseInput(zomboid);

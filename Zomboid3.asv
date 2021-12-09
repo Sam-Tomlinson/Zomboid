@@ -33,6 +33,7 @@ endings = readcell('endings.txt');
 timeLeft = 180;
 gameClock = timer('ExecutionMode','FixedRate');
 set(gameClock,'TimerFcn','timeLeft = gameTimer2(timeLeft,numberIndex,numberStr,clock);');
+set(gameClock,'Period',1);
 
 % Initilizing variables
 stage = 1;
@@ -311,7 +312,10 @@ while stage ~= 0 && timeLeft > 0
                fprintf('You walk down the street at a swift pace, but the sun begins to set faster than you expected. You move\n')
                fprintf('faster but you quickly realize that you won’t make it out of the city before nightfall. As the sun sets you\n')
                fprintf('see the bomb fall, and the bright light that follows its descent.\n\n')
-               for i = 1:5
+               stop(gameClock);
+               set(gameClock,'Period',0.01);
+               start(gameClock);
+               while timeLeft >= 1
                     runLevel(zomboid,'crossroadsWalking1.txt')
                     pause(.2)
                     runLevel(zomboid,'crossroadsWalking2.txt')
@@ -359,8 +363,16 @@ while stage ~= 0 && timeLeft > 0
                 if isequal(howLeaveCar,'a')
                     fprintf('You decide to wait and lay low hoping they will ignore you and leave. The next few hours go by and you\n')
                     fprintf('begin to realize that they will not leave in time.')
-                    pause(10)
-                    fprintf('The bomb hits you and you perish.\n\n')
+%                     timeLeft2 = timeLeft
+                    stop(gameClock);
+%                     timeLeft = timeLeft2;
+                    set(gameClock,'Period',0.05);
+                    start(gameClock);
+                    while timeLeft >= 0
+                        
+                        pause(1)
+                    end
+                    fprintf('\nThe bomb hits you and you perish.\n\n')
                     fprintf(2,'You Died ')
                     fprintf('\n\npress any key to continue')
                     getMouseInput(zomboid);
@@ -797,7 +809,7 @@ while stage ~= 0 && timeLeft > 0
                             panelCode(end+1) = panelChoice;
                         end
                         close
-                        if length(panelCode) == 5 && panelCode(1:end-1) == [9 9 2 9]
+                        if length(panelCode) == 5 & panelCode(1:end-1) == [9 9 2 9]
                             fprintf('You input the code. The terminal reads “Correct Password.” The screen then changes to a complicated\n')
                             fprintf('screen with a U.S. Army logo on it. There are numerous files and controls, but one sticks out to you,\n')
                             fprintf('“Abort nuclear launch.” You press it. The terminal reads: “Nuclear Launch aborted. “You are\n')
