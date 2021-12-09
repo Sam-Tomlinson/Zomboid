@@ -61,7 +61,7 @@ roughWater = 'default';
 brokenBoat = 'default';
 banditZombieFight = 'default';
 banditOffer = 'default';
-comunityChoice = 'default';
+communityChoice = 'default';
 communityZombieHoard = 'default';
 finalZombies = 'default';
 
@@ -70,7 +70,7 @@ finalZombies = 'default';
 
     
 
-%Debug stuff
+%Start stuff that is needed for game, but should not be looped
 runLevel(zomboid,'startCard.txt')
 gameFigure = get(groot,'CurrentFigure');
 movegui(gameFigure,'north');
@@ -1269,14 +1269,14 @@ while stage ~= 0 && timeLeft > 0
             fprintf('only way out of the city. She says she knows you have no reason to, but begs for your help. What do you do\n\n')
             fprintf(' [\ba.)   Help them\n')
             fprintf(' b.)   Carry on your way]\b\n\n')
-            while isequal(comunityChoice,'default')
-                comunityChoice = getKeyboardInput(zomboid);
-                if isequal(comunityChoice,'a')
+            while isequal(communityChoice,'default')
+                communityChoice = getKeyboardInput(zomboid);
+                if isequal(communityChoice,'a')
                     stage = 24;
-                elseif isequal(comunityChoice,'b')
+                elseif isequal(communityChoice,'b')
                     stage = 25;
                 else
-                    comunityChoice = 'default';
+                    communityChoice = 'default';
                 end
             end
         
@@ -1467,5 +1467,4 @@ else
     fprintf('Here is your save file, be sure to copy it.  Don''t forget the spaces\n')
     savefile = saveFile{1}
     close all; clear
-   
 end

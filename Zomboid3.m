@@ -70,7 +70,7 @@ finalZombies = 'default';
 
     
 
-%Debug stuff
+%Start stuff that is needed for game, but should not be looped
 runLevel(zomboid,'startCard.txt')
 gameFigure = get(groot,'CurrentFigure');
 movegui(gameFigure,'north');
@@ -1467,5 +1467,4 @@ else
     fprintf('Here is your save file, be sure to copy it.  Don''t forget the spaces\n')
     savefile = saveFile{1}
     close all; clear
-   
 end
